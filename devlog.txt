@@ -15,7 +15,13 @@ PROJ 01 APIs - <Description here>
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 
-UnitedPurpleNPCs -- 2022-12-02 ...
+UnitedPurpleNPCs -- 2022-12-02 EOC
 --------------------------------------------------------------
 Set up repo, added submodule, added basic files
+==============================================================
+
+HenryB -- 2022-12-06 16:48
+--------------------------------------------------------------
+Added feedback to design doc (login/logout no longer a stretch
+goal, made a couple sections clearer/more detailed in description)
 ==============================================================
