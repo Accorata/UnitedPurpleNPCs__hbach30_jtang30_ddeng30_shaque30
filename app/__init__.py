@@ -18,11 +18,12 @@ def showindex():
     # url = request.urlopen(f"https://api.nasa.gov/planetary/apod?api_key={key}").read()
     # dict = json.loads(url)
     # , picture=dict['url'], explanation=dict['explanation'], head = dict['title']
-    
-    if 'username' in session :
-        return render_template('index.html')
-    else :
-        return render_template('login.html')
+    return render_template('index.html')
+
+    # if 'username' in session :
+    #     return render_template('index.html')
+    # else :
+    #     return render_template('login.html')
 
 
 
