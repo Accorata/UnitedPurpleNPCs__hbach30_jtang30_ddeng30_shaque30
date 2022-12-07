@@ -25,3 +25,8 @@ HenryB -- 2022-12-06 16:48
 Added feedback to design doc (login/logout no longer a stretch
 goal, made a couple sections clearer/more detailed in description)
 ==============================================================
+
+HenryB -- 2022-12-07 13:00
+--------------------------------------------------------------
+Added project summary on readme
+==============================================================
