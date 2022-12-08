@@ -1,5 +1,5 @@
-# LoveCalc Advanced by UnitedPurpleNPCs
-## PM: Henry Bach
+# LoveCalc But Creepy by UnitedPurpleNPCs
+## PM: Henry Bach (API/Flask)
 ## Devo: Jeffery Tang (SQLite)
 ## Devo: David Deng (API/Flask)
 ## Devo: Shafiul Haque (HTML)

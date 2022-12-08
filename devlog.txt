@@ -2,7 +2,7 @@ UnitedPurpleNPCs
 David (Phin), Henry (e), Jeffery (Mathias), Shafiul (Messi)
 Pd 8
 ------------------------------------------
-PROJ 01 APIs - <Description here>
+PROJ 01 APIs - LoveCalc But Creepy
 
  ______   ______   __   __   __       ______   _______
 /_____/\ /_____/\ /_/\ /_/\ /_/\     /_____/\ /______/\
@@ -35,4 +35,12 @@ JefferyT -- 2022-12-07 13:00
 --------------------------------------------------------------
 Added API list and lauch codes in readme
 Added requirements.txt
+==============================================================
+
+JefferyT -- 2022-12-08 13:35
+--------------------------------------------------------------
+Added roles of team members in readme
+Edited project name/description in devlog and readme
+Added headings to py files
+Began work on databases - created tables
 ==============================================================

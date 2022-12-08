@@ -1,3 +1,12 @@
+'''
+UnitedPurpleNPCs: Henry, Shafiul, David, Jeffery
+SoftDev
+P1 -- LoveCalc But Creepy
+2022-12-08
+time spent: 1 hrs
+'''
+
+
 from flask import *
 from db import *
 from urllib import *
