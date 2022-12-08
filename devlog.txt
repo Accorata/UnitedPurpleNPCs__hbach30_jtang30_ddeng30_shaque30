@@ -44,3 +44,9 @@ Edited project name/description in devlog and readme
 Added headings to py files
 Began work on databases - created tables
 ==============================================================
+
+HenryB -- 2022-12-08 15:29
+--------------------------------------------------------------
+Templated functions in __init__.py 
+Started formatting API calls
+==============================================================
