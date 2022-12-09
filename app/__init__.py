@@ -27,18 +27,30 @@ def show_index():
     # url = request.urlopen(f"https://api.nasa.gov/planetary/apod?api_key={key}").read()
     # dict = json.loads(url)
     # , picture=dict['url'], explanation=dict['explanation'], head = dict['title']
-    
-    #return render_template('index.html')
+
+    # Time from location (I'll move this to a seperate function soon)
+
+    #ipstack_key = open("key_nasa.txt", "r").read()
 
     location = 'America/New_York'
+
     url = f'https://worldtimeapi.org/api/timezone/'+location+'.json'
     data = request.urlopen(url).read()
     results = json.loads(data)
-
     time_data = results['datetime']
-    time = time_data[10:]
-    return time
-    #time = results[something]
+
+    days_of_week = ('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday')
+    week_day = days_of_week[int(results['day_of_week'])]
+
+    months = ('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December')
+    month = months[int(time_data[5:7])-1]
+
+    day = time_data[8:10]
+    year = time_data[0:4]
+    time = time_data[11:16]
+
+    #return results
+    return render_template('index.html', date=month+" "+day+", "+year, time=time, weekday=week_day)#, month=month)
 
     # if 'username' in session :
     #     return render_template('index.html')
