@@ -31,6 +31,8 @@ def show_index():
     # Time from location (I'll move this to a seperate function soon)
 
     #ipstack_key = open("key_nasa.txt", "r").read()
+    latitude = 0
+    longitude = 0
 
     location = 'America/New_York'
 

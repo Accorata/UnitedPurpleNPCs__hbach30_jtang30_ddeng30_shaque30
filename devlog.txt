@@ -69,3 +69,8 @@ HenryB -- 2022-12-09 14:05
 Set up Live Share
 Worked on page functionality and started using WorldTimeAPI
 ==============================================================
+
+HenryB -- 2022-12-09 15:34
+--------------------------------------------------------------
+WorldTimeAPI calls functioning and data processed into nicer forms
+Started testing other APIs
