@@ -50,3 +50,16 @@ HenryB -- 2022-12-08 15:29
 Templated functions in __init__.py 
 Started formatting API calls
 ==============================================================
+
+JefferyT -- 2022-12-09 14:00
+--------------------------------------------------------------
+Worked on login and signup pages
+==============================================================
+
+ShafiulH -- 2022-12-09 14:05
+--------------------------------------------------------------
+Created the login and signup pages
+Used Foundation as the general structure
+Made links between the buttons connecting them to different pages
+Switched index.html to main.html
+==============================================================
