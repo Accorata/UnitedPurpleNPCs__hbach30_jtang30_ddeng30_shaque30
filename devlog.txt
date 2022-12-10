@@ -84,3 +84,10 @@ Shafiul -- 2022-12-10 10:09
 --------------------------------------------------------------
 Created buttons linking webpages to other webpages
 Created basic html templates for all the pages
+==============================================================
+
+HenryB -- 2022-12-10 14:07
+--------------------------------------------------------------
+Integrated ipstackAPI
+Started to integrate weatherbitAPI
+==============================================================

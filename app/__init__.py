@@ -16,7 +16,7 @@ import json
 app = Flask(__name__)
 # key = open("key_nasa.txt", "r").read()
 
-db_name = "discobandit.db"
+db_name = "p1_info.db"
 
 # db = sqlite3.connect(db_name)
 #     c = db.cursor()
@@ -30,19 +30,34 @@ def show_index():
 
     # Time from location (I'll move this to a seperate function soon)
 
-    #ipstack_key = open("key_nasa.txt", "r").read()
-    latitude = 0
-    longitude = 0
+    ipstack_key = open("app/keys/ipstack_key.txt", "r").read()
+
+    ip = "2603:7000:8d00:75f4:b428:bff8:4296:d966"
+    url = f"http://api.ipstack.com/"+ip+"?access_key="+ipstack_key
+
+    data = request.urlopen(url).read()
+    location_results = json.loads(data)
+
+    latitude = location_results['latitude']
+    longitude = location_results['longitude']
+
+    # weatherbit_key = open("app/keys/weatherbit_key.txt", "r").read()
+    #
+    # url = f"https://api.weatherbit.io/v2.0/current?lat="+latitude+"&lon="+longitude+"&key="+weatherbit_key
+    #
+    # data = request.urlopen(url).read()
+    # weather_results = json.loads(data)
+    # return weather_results;
 
     location = 'America/New_York'
 
     url = f'https://worldtimeapi.org/api/timezone/'+location+'.json'
     data = request.urlopen(url).read()
-    results = json.loads(data)
-    time_data = results['datetime']
+    time_results = json.loads(data)
+    time_data = time_results['datetime']
 
     days_of_week = ('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday')
-    week_day = days_of_week[int(results['day_of_week'])]
+    week_day = days_of_week[int(time_results['day_of_week'])]
 
     months = ('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December')
     month = months[int(time_data[5:7])-1]
@@ -52,7 +67,7 @@ def show_index():
     time = time_data[11:16]
 
     #return results
-    return render_template('index.html', date=month+" "+day+", "+year, time=time, weekday=week_day)#, month=month)
+    return render_template('index.html', date=month+" "+day+", "+year, time=ipstack_key, weekday=week_day)#, month=month)
 
     # if 'username' in session :
     #     return render_template('index.html')
