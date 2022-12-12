@@ -97,3 +97,10 @@ HenryB -- 2022-12-12 12:39
 Integrated weatherbitAPI and WorldTimeAPI now gets time zone
 from weatherbitAPI after getting lat/longitude from ipstackAPI
 ==============================================================
+
+HenryB -- 2022-12-12 16:02
+--------------------------------------------------------------
+Added session log in/log out username stuff
+Fixed bug where 'request' came from two modules by replacing
+one with 'form_request' (we'll use this for HTML/POST forms)
+==============================================================

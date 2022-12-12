@@ -7,14 +7,16 @@ time spent: 1 hrs
 '''
 
 
-from flask import *
+from flask import Flask, session, render_template, redirect, url_for, request as flask_request
 from db import *
 from urllib import *
 import sqlite3
 import json
 
 app = Flask(__name__)
+app.secret_key = 'foo' #For now
 # key = open("key_nasa.txt", "r").read()
+
 
 db_name = "p1_info.db"
 
@@ -24,6 +26,8 @@ db_name = "p1_info.db"
 
 @app.route('/', methods = ['GET', 'POST']) # Landing Page
 def show_index():
+    if 'username' not in session :
+        return render_template('main.html')
     # url = request.urlopen(f"https://api.nasa.gov/planetary/apod?api_key={key}").read()
     # dict = json.loads(url)
     # , picture=dict['url'], explanation=dict['explanation'], head = dict['title']
@@ -67,11 +71,8 @@ def show_index():
     time = time_data[11:16]
 
     #return results
+    return render_template('index.html', date=month+" "+day+", "+year, time=time, weekday=week_day, weather=weather_descption)#, month=month)
 
-    if 'username' in session :
-        return render_template('index.html', date=month+" "+day+", "+year, time=time, weekday=week_day, weather=weather_descption)#, month=month)
-    else :
-        return render_template('main.html')
 
 @app.route('/signup', methods = ["GET", "POST"]) # Sign up page
 def show_signup():
@@ -83,10 +84,12 @@ def show_login():
 
 @app.route('/new_account', methods = ["POST"])
 def create_account():
-    if request.method == 'POST':
-        new_account = [request.form['username'], request.form['password']]
-        c.execute("INSERT INTO info VALUES (?, ?)", new_account)
-        db.commit()
+    if flask_request.method == 'POST':
+        username = flask_request.form['username']
+        new_account = [username, flask_request.form['password']]
+        # c.execute("INSERT INTO info VALUES (?, ?)", new_account)
+        # db.commit()
+        session['username'] = username
     return redirect(url_for('show_index'))
 
 @app.route('/login_user', methods = ["POST"]) # Redirection to home page upon successful login
