@@ -22,7 +22,7 @@ db_name = "p1_info.db"
 #     c = db.cursor()
 #     db.close()
 
-@app.route('/') # Landing Page
+@app.route('/', methods = ['GET', 'POST']) # Landing Page
 def show_index():
     # url = request.urlopen(f"https://api.nasa.gov/planetary/apod?api_key={key}").read()
     # dict = json.loads(url)
@@ -67,32 +67,34 @@ def show_index():
     time = time_data[11:16]
 
     #return results
-    return render_template('index.html', date=month+" "+day+", "+year, time=time, weekday=week_day, weather=weather_descption)#, month=month)
 
-    # if 'username' in session :
-    #     return render_template('index.html')
-    # else :
-    #     return render_template('main.html')
+    if 'username' in session :
+        return render_template('index.html', date=month+" "+day+", "+year, time=time, weekday=week_day, weather=weather_descption)#, month=month)
+    else :
+        return render_template('main.html')
 
-@app.route('/signup') # Sign up page
+@app.route('/signup', methods = ["GET", "POST"]) # Sign up page
 def show_signup():
     return render_template('signup.html')
 
-@app.route('/login') # Login page
+@app.route('/login', methods = ["GET", "POST"]) # Login page
 def show_login():
     return render_template('login.html')
 
-@app.route('/new_account')
+@app.route('/new_account', methods = ["POST"])
 def create_account():
-    #...
+    if request.method == 'POST':
+        new_account = [request.form['username'], request.form['password']]
+        c.execute("INSERT INTO info VALUES (?, ?)", new_account)
+        db.commit()
     return redirect(url_for('show_index'))
 
-@app.route('/login_user') # Redirection to home page upon successful login
+@app.route('/login_user', methods = ["POST"]) # Redirection to home page upon successful login
 def login():
     #login stuff
     return redirect(url_for('show_index'))
 
-@app.route('/logout')
+@app.route('/logout', methods = ["POST"])
 def logout():
     session.pop('username')
     return redirect(url_for('show_index'))

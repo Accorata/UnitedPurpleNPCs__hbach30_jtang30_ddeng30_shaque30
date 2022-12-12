@@ -18,17 +18,17 @@
     <h1> SIGNUP </h1>
     <h3> Create a username and password below to be able to log in! </h3>
     <h4> {{error}} </h4>
-    <form action="/new_account", method="post">
+    <form action="/new_account", method="POST">
       Username: <input type="text" name="username"> </br>
       Password: <input type="text" name="password"> </br>
       Repeat Password: <input type="text" name="password"> </br>
       <input class="small button" type="submit" name="sub1">
     </form>
     <br>
-    <form action="/login", method="post">
+    <form action="/login", method="POST">
       <a class="small button" href="/login">Login</a>
     </form>
-    <form action="/", method="post">
+    <form action="/", method="POST">
         <a class="small button" href="/">Back to site</a>
       </form>
       <div>
