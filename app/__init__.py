@@ -41,15 +41,15 @@ def show_index():
     latitude = location_results['latitude']
     longitude = location_results['longitude']
 
-    # weatherbit_key = open("app/keys/weatherbit_key.txt", "r").read()
-    #
-    # url = f"https://api.weatherbit.io/v2.0/current?lat="+latitude+"&lon="+longitude+"&key="+weatherbit_key
-    #
-    # data = request.urlopen(url).read()
-    # weather_results = json.loads(data)
-    # return weather_results;
+    weatherbit_key = open("app/keys/weatherbit_key.txt", "r").read()
 
-    location = 'America/New_York'
+    url = f"https://api.weatherbit.io/v2.0/current?lat="+str(latitude)+"&lon="+str(longitude)+"&key="+weatherbit_key
+
+    data = request.urlopen(url).read()
+    weather_results = json.loads(data)['data'][0]
+    #return weather_results;
+    weather_descption = weather_results['weather']['description']
+    location = weather_results['timezone']
 
     url = f'https://worldtimeapi.org/api/timezone/'+location+'.json'
     data = request.urlopen(url).read()
@@ -67,7 +67,7 @@ def show_index():
     time = time_data[11:16]
 
     #return results
-    return render_template('index.html', date=month+" "+day+", "+year, time=ipstack_key, weekday=week_day)#, month=month)
+    return render_template('index.html', date=month+" "+day+", "+year, time=time, weekday=week_day, weather=weather_descption)#, month=month)
 
     # if 'username' in session :
     #     return render_template('index.html')

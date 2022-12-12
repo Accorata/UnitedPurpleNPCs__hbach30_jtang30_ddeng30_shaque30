@@ -91,3 +91,9 @@ HenryB -- 2022-12-10 14:07
 Integrated ipstackAPI
 Started to integrate weatherbitAPI
 ==============================================================
+
+HenryB -- 2022-12-12 12:39
+--------------------------------------------------------------
+Integrated weatherbitAPI and WorldTimeAPI now gets time zone
+from weatherbitAPI after getting lat/longitude from ipstackAPI
+==============================================================
