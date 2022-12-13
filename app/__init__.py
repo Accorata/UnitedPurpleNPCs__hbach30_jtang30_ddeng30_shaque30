@@ -12,10 +12,12 @@ from db import *
 from urllib import *
 import sqlite3
 import json
+import os
+
+
 
 app = Flask(__name__)
-app.secret_key = 'foo' #For now
-# key = open("key_nasa.txt", "r").read()
+app.secret_key = os.urandom()
 
 
 db_name = "p1_info.db"
@@ -23,6 +25,7 @@ db_name = "p1_info.db"
 # db = sqlite3.connect(db_name)
 #     c = db.cursor()
 #     db.close()
+
 
 @app.route('/', methods = ['GET', 'POST']) # Landing Page
 def show_index():
@@ -78,9 +81,11 @@ def show_index():
 def show_signup():
     return render_template('signup.html')
 
+
 @app.route('/login', methods = ["GET", "POST"]) # Login page
 def show_login():
     return render_template('login.html')
+
 
 @app.route('/new_account', methods = ["POST"])
 def create_account():
@@ -92,15 +97,18 @@ def create_account():
         session['username'] = username
     return redirect(url_for('show_index'))
 
+
 @app.route('/login_user', methods = ["POST"]) # Redirection to home page upon successful login
 def login():
     #login stuff
     return redirect(url_for('show_index'))
 
+
 @app.route('/logout', methods = ["POST"])
 def logout():
     session.pop('username')
     return redirect(url_for('show_index'))
+
 
 if __name__ == "__main__":
     app.debug = True
