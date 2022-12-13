@@ -17,7 +17,7 @@ import os
 
 
 app = Flask(__name__)
-app.secret_key = os.urandom()
+app.secret_key = os.urandom(32)
 
 
 db_name = "p1_info.db"
