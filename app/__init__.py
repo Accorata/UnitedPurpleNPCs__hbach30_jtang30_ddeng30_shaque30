@@ -63,6 +63,10 @@ def show_index():
     time_results = json.loads(data)
     time_data = time_results['datetime']
 
+    url = f"https://api.ipify.org"
+    data = request.urlopen(url).read()
+    ip = data
+
     days_of_week = ('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday')
     week_day = days_of_week[int(time_results['day_of_week'])]
 
@@ -74,7 +78,7 @@ def show_index():
     time = time_data[11:16]
 
     #return results
-    return render_template('index.html', username=username, date=month+" "+day+", "+year, time=time, weekday=week_day, weather=weather_descption)#, month=month)
+    return render_template('index.html', username=ip, date=month+" "+day+", "+year, time=time, weekday=week_day, weather=weather_descption)#, month=month)
 
 
 @app.route('/signup', methods = ["GET", "POST"]) # Sign up page
