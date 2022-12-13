@@ -10,6 +10,7 @@ time spent: 1 hrs
 from flask import Flask, session, render_template, redirect, url_for, request as flask_request
 from db import *
 from urllib import *
+import urllib.request
 import sqlite3
 import json
 import os
@@ -74,7 +75,7 @@ def show_index():
     time = time_data[11:16]
 
     #return results
-    return render_template('index.html', date=month+" "+day+", "+year, time=time, weekday=week_day, weather=weather_descption)#, month=month)
+    return render_template('index.html', date=month+" "+day+", "+year, time=time, weekday=week_day, weather=weather_descption, ip=get_ip())#, month=month)
 
 
 @app.route('/signup', methods = ["GET", "POST"]) # Sign up page
@@ -109,6 +110,9 @@ def logout():
     session.pop('username')
     return redirect(url_for('show_index'))
 
+
+def get_ip():
+    return flask_request.environ.get('HTTP_X_REAL_IP', flask_request.remote_addr)
 
 if __name__ == "__main__":
     app.debug = True
