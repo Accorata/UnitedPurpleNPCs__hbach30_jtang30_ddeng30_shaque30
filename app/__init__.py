@@ -21,11 +21,9 @@ app = Flask(__name__)
 app.secret_key = os.urandom(32)
 
 
-db_name = "p1_info.db"
+db_name = "app/p1_info.db"
 
-# db = sqlite3.connect(db_name)
-#     c = db.cursor()
-#     db.close()
+
 
 
 @app.route('/', methods = ['GET', 'POST']) # Landing Page
@@ -35,6 +33,8 @@ def show_index():
     # url = request.urlopen(f"https://api.nasa.gov/planetary/apod?api_key={key}").read()
     # dict = json.loads(url)
     # , picture=dict['url'], explanation=dict['explanation'], head = dict['title']
+
+    username = session['username']
 
     # Time from location (I'll move this to a seperate function soon)
 
@@ -64,6 +64,10 @@ def show_index():
     time_results = json.loads(data)
     time_data = time_results['datetime']
 
+    url = f"https://api.ipify.org"
+    data = request.urlopen(url).read()
+    ip = data
+
     days_of_week = ('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday')
     week_day = days_of_week[int(time_results['day_of_week'])]
 
@@ -75,7 +79,7 @@ def show_index():
     time = time_data[11:16]
 
     #return results
-    return render_template('index.html', date=month+" "+day+", "+year, time=time, weekday=week_day, weather=weather_descption, ip=get_ip())#, month=month)
+    return render_template('index.html', username=ip, date=month+" "+day+", "+year, time=time, weekday=week_day, weather=weather_descption)#, month=month)
 
 
 @app.route('/signup', methods = ["GET", "POST"]) # Sign up page
@@ -93,8 +97,11 @@ def create_account():
     if flask_request.method == 'POST':
         username = flask_request.form['username']
         new_account = [username, flask_request.form['password']]
-        # c.execute("INSERT INTO info VALUES (?, ?)", new_account)
-        # db.commit()
+        db = sqlite3.connect(db_name)
+        c = db.cursor()
+        c.execute("INSERT INTO users VALUES (?, ?)", new_account)
+        db.commit()
+        db.close()
         session['username'] = username
     return redirect(url_for('show_index'))
 
