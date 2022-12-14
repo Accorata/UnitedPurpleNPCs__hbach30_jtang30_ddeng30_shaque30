@@ -10,13 +10,20 @@
   </head>
 
   <body>
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <ul class="menu">
+          <li class="menu-text">UnitedPurpleNPCs</li>
+          <li><form action="/logout" method="POST">
+              <input class="small button" type="submit" value="Logout">
+          </form></li>
+        </ul>
+      </div>
+  </div>
+    <br>
     <div class="grid-x grid-padding-x">
       <div class="large-12 cell">
     <div>
-      <br>
-      <form action="/logout" method="POST">
-        <input class="small button" type="submit" name="sub2" value="Logout">
-      </form>
       <form action="/profile" method="POST">
         <a class="small button" name="{{username}}" href="/view">
             <div>View Profile</div>

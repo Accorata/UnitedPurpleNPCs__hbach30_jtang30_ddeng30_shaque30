@@ -1,0 +1,15 @@
+html, body{
+    height: 100%;
+    margin: 0;
+}
+
+.gif{
+    background-image: url('https://i.pinimg.com/originals/20/20/bf/2020bf44ed994d07bdc2196540b3bbd3.gif');
+    background-size: cover;
+    height: 100vh;
+    padding:0;
+}
+
+.bruh{
+    background-image: url('https://acegif.com/wp-content/uploads/gif/outerspace-6.gif'); background-size:cover; background-repeat:no-repeat; background-attachment:fixed; background-position:center
+}
