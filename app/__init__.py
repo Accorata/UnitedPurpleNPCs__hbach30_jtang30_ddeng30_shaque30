@@ -15,8 +15,6 @@ import sqlite3
 import json
 import os
 
-
-
 app = Flask(__name__)
 app.secret_key = os.urandom(32)
 
@@ -31,7 +29,14 @@ def show_index():
         return render_template('main.html')
     username = session['username']
     (ip, date, time, week_day, weather) = get_user_info()
-    return render_template('index.html', username=username, ip=ip, date=date, time=time, weekday=week_day, weather=weather)#, month=month)
+    stored_data = (username, "city", weather, 5, 5)
+    db = sqlite3.connect(db_name)
+    c = db.cursor()
+    c.execute("insert into info values (?,?,?,?,?);", (stored_data))
+    db.commit()
+    db.close()
+    others = find_similar_results()
+    return render_template('index.html', username=username, ip=others, date=date, time=time, weekday=week_day, weather=weather)#, month=month)
 
 
 @app.route('/signup', methods = ["GET", "POST"]) # Sign up page
@@ -115,13 +120,15 @@ def get_user_info():
     location = weather_results['timezone']
     #return weather_results
 
-    url = f'https://worldtimeapi.org/api/timezone/'+location+'.json'
-    data = request.urlopen(url).read()
-    time_results = json.loads(data)
-    time_data = time_results['datetime']
+    # url = f'https://worldtimeapi.org/api/timezone/'+location+'.json'
+    # print(url)
+    # data = request.urlopen(url).read()
+    # time_results = json.loads(data)
+    #time_data = time_results['datetime']
+    time_data = "111111111111111111111111111111111111111111111111111111"
 
     days_of_week = ('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday')
-    week_day = days_of_week[int(time_results['day_of_week'])]
+    week_day = 'Oops'#days_of_week[int(time_results['day_of_week'])]
 
     months = ('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December')
     month = months[int(time_data[5:7])-1]
@@ -134,9 +141,17 @@ def get_user_info():
 def get_ip():
     return flask_request.environ.get('HTTP_X_REAL_IP', flask_request.remote_addr)
 
+def find_similar_results():
+    db = sqlite3.connect(db_name)
+    c = db.cursor()
+    #user_data = c.execute("select * from info where username = ?", session['username']).fetchall()
+    user_data = c.execute("select * from info where username = hen").fetchall()   
+    city = user_data[0]["city"]
+    user_list = c.execute("select * from info where city = ?;", city).fetchall()
+    return user_list
+    
 if __name__ == "__main__":
     app.debug = True
     app.run()
 
-def find_similar_results():
-    return 100
+

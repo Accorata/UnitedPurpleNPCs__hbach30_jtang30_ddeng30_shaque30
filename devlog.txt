@@ -105,4 +105,22 @@ Fixed bug where 'request' came from two modules by replacing
 one with 'form_request' (we'll use this for HTML/POST forms)
 ==============================================================
 
-team for yesterday and today
+UnitedPurpleNPCs -- 2022-12-14 EOC
+--------------------------------------------------------------
+Login finally works (user accounts are saved, etc...)
+More html revisions
+IP grabbed from user
+==============================================================
+
+UnitedPurpleNPCs -- 2022-12-15 EOC
+--------------------------------------------------------------
+More html stuff
+Code revisions/clarity
+==============================================================
+
+UnitedPurpleNPCs -- 2022-12-16 EOC
+--------------------------------------------------------------
+Sacrificed our lives to the evil god within this computer
+HTML is MUCH better
+stores user info??
+==============================================================
