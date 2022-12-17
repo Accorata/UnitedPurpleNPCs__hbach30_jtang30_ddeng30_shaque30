@@ -18,10 +18,7 @@ import os
 app = Flask(__name__)
 app.secret_key = os.urandom(32)
 
-
 db_name = "app/p1_info.db"
-
-
 
 @app.route('/', methods = ['GET', 'POST']) # Landing Page
 def show_index():
@@ -39,7 +36,6 @@ def show_index():
     others = find_similar_results(session['username'])
     return render_template('index.html', username=username, ip=others, date=date, time=time, weekday=week_day, weather=weather)#, month=month)
 
-
 @app.route('/signup', methods = ["GET", "POST"]) # Sign up page
 def show_signup():
     return render_template('signup.html')
@@ -56,18 +52,19 @@ def create_user():
         user_list = c.execute("SELECT username from users;").fetchall()
         #print(user_list)
         username = flask_request.form['username']
-        if (username,) not in user_list:
-            if flask_request.form['password'] == flask_request.form['password1']:
-                if len(flask_request.form['password']) > 0:
-                    new_account = [username, flask_request.form['password']]
-                    c.execute("INSERT INTO users VALUES (?, ?)", new_account)
-                    db.commit()
-                    db.close()
-                    session['username'] = username
-                    return redirect(url_for('show_index'))
-                return render_template('signup.html', error = "Please enter a password.")
+        if (username,) in user_list:
+            return render_template('signup.html', error = "Username already exists.")
+        if flask_request.form['password'] != flask_request.form['password1']:
             return render_template('signup.html', error = "Passwords do not match.")
-        return render_template('signup.html', error = "Username already exists.")
+        if len(flask_request.form['password']) == 0:
+            return render_template('signup.html', error = "Please enter a password.")
+            
+        new_account = [username, flask_request.form['password']]
+        c.execute("INSERT INTO users VALUES (?, ?)", new_account)
+        db.commit()
+        db.close()
+        session['username'] = username
+        return redirect(url_for('show_index'))
     return "Error- not post"
 
 
@@ -146,7 +143,7 @@ def get_ip():
 def find_similar_results(username):
     db = sqlite3.connect(db_name)
     c = db.cursor()
-    user_data = c.execute("select * from info where username = ?;", (username,)).fetchall()[0]
+    user_data = c.execute("select * from info where username = ?;", (username,)).fetchone()
     (username, city, weather, temp, number) = user_data
     user_list = c.execute("select * from info where city = ? or weather = ? or temperature = ? or time = ?;", (city, weather, temp, number)).fetchall()
     return user_list
