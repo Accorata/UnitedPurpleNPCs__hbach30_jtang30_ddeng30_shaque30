@@ -28,14 +28,15 @@ def show_index():
     if 'username' not in session :
         return render_template('main.html')
     username = session['username']
-    (ip, date, time, week_day, weather) = get_user_info()
-    stored_data = (username, "city", weather, 5, 5)
+    (ip, date, time, week_day, weather, city) = get_user_info()
+    stored_data = (username, city, weather, 5, time)
     db = sqlite3.connect(db_name)
     c = db.cursor()
-    c.execute("insert into info values (?,?,?,?,?);", (stored_data))
+    c.execute("delete from info where username = ?;", (username,))
+    c.execute("insert into info values (?,?,?,?,?);", stored_data)
     db.commit()
     db.close()
-    others = find_similar_results()
+    others = find_similar_results(session['username'])
     return render_template('index.html', username=username, ip=others, date=date, time=time, weekday=week_day, weather=weather)#, month=month)
 
 
@@ -54,10 +55,10 @@ def create_user():
         c = db.cursor()
         user_list = c.execute("SELECT username from users;").fetchall()
         #print(user_list)
-        if (flask_request.form['username'],) not in user_list: 
+        username = flask_request.form['username']
+        if (username,) not in user_list:
             if flask_request.form['password'] == flask_request.form['password1']:
                 if len(flask_request.form['password']) > 0:
-                    username = flask_request.form['username']
                     new_account = [username, flask_request.form['password']]
                     c.execute("INSERT INTO users VALUES (?, ?)", new_account)
                     db.commit()
@@ -102,6 +103,7 @@ def get_user_info():
     ipstack_key = open("app/keys/ipstack_key.txt", "r").read()
 
     url = f"http://api.ipstack.com/"+ip+"?access_key="+ipstack_key
+    print(url)
 
     data = request.urlopen(url).read()
     location_results = json.loads(data)
@@ -118,17 +120,17 @@ def get_user_info():
     #return weather_results;
     weather_description = weather_results['weather']['description']
     location = weather_results['timezone']
+    divider_index = location.index('/')
+    city = location[divider_index+1:]
     #return weather_results
 
-    # url = f'https://worldtimeapi.org/api/timezone/'+location+'.json'
-    # print(url)
-    # data = request.urlopen(url).read()
-    # time_results = json.loads(data)
-    #time_data = time_results['datetime']
-    time_data = "111111111111111111111111111111111111111111111111111111"
+    url = f'https://worldtimeapi.org/api/timezone/'+location+'.json'
+    data = request.urlopen(url).read()
+    time_results = json.loads(data)
+    time_data = time_results['datetime']
 
     days_of_week = ('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday')
-    week_day = 'Oops'#days_of_week[int(time_results['day_of_week'])]
+    week_day = days_of_week[int(time_results['day_of_week'])]
 
     months = ('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December')
     month = months[int(time_data[5:7])-1]
@@ -136,22 +138,19 @@ def get_user_info():
     day = time_data[8:10]
     year = time_data[0:4]
     time = time_data[11:16]
-    return (ip, month+" "+day+", "+year, time, week_day, weather_description)
+    return (ip, month+" "+day+", "+year, time, week_day, weather_description, city)
 
 def get_ip():
     return flask_request.environ.get('HTTP_X_REAL_IP', flask_request.remote_addr)
 
-def find_similar_results():
+def find_similar_results(username):
     db = sqlite3.connect(db_name)
     c = db.cursor()
-    #user_data = c.execute("select * from info where username = ?", session['username']).fetchall()
-    user_data = c.execute("select * from info where username = hen").fetchall()   
-    city = user_data[0]["city"]
-    user_list = c.execute("select * from info where city = ?;", city).fetchall()
+    user_data = c.execute("select * from info where username = ?;", (username,)).fetchall()[0]
+    (username, city, weather, temp, number) = user_data
+    user_list = c.execute("select * from info where city = ? or weather = ? or temperature = ? or time = ?;", (city, weather, temp, number)).fetchall()
     return user_list
-    
+
 if __name__ == "__main__":
     app.debug = True
     app.run()
-
-

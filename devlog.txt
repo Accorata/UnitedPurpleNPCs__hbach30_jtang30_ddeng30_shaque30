@@ -14,8 +14,7 @@ PROJ 01 APIs - LoveCalc But Creepy
 ==============================================================
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
-
-UnitedPurpleNPCs -- 2022-12-02 EOC
+UnitedPurpleNPCs -- 2022-12-02 EOC (End of class)
 --------------------------------------------------------------
 Set up repo, added submodule, added basic files
 ==============================================================
@@ -123,4 +122,13 @@ UnitedPurpleNPCs -- 2022-12-16 EOC
 Sacrificed our lives to the evil god within this computer
 HTML is MUCH better
 stores user info??
+==============================================================
+
+HenryB -- 2022-12-17 13:49
+--------------------------------------------------------------
+Does store user info and only most recent version of it
+We can find similar results and display them (but HTML needed)
+Warning- ipstack_key has exhausted its uses, and it's aware
+of when I try to use a different email on the same computer-
+so someone has to provision a new key.
 ==============================================================

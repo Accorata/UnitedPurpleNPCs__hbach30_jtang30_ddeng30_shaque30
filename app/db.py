@@ -14,7 +14,7 @@ c = db.cursor()
 
 c.execute("""CREATE TABLE IF NOT EXISTS users(username TEXT UNIQUE, password TEXT)""")
 c.execute("""CREATE TABLE IF NOT EXISTS info(username TEXT, city TEXT, weather TEXT, temperature INTEGER,
- love_percent INTEGER)""")
+ time TEXT)""")
 
 db.commit()
 db.close()
