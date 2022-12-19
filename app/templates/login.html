@@ -13,26 +13,43 @@
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 </head>
 
-<body>
-  <div class="grid-x grid-padding-x">
-    <div class="large-12 cell"><br>
-      <h1> LOGIN </h1>
-      <h3> Enter your username and password below to proceed! </h3>
-      <h4> {{error}} </h4>
-      <form action="/login_user", method="POST">
-        Username: <input type="text" name="username"> </br>
-        Password: <input type="text" name="password"> </br>
-        <input class="small button" type="submit" name="sub1">
-      </form>
-      <br>
-      <form action="/signup", method="POST">
-        <a class="small button" href="/signup">Sign Up</a>
-      </form>
-      <form action="/", method="POST">
-          <a class="small button" href="/">Back to Site</a>
-      </form>
-    <div>
+<body style="background-image: url('https://acegif.com/wp-content/uploads/gif/outerspace-6.gif'); background-size:cover; background-repeat:no-repeat; background-attachment:fixed; background-position:center">
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <ul class="menu">
+        <li class="menu-text">Stalker™</li>
+        <li style="color: purple;"><a style="color: purple" href="about.html">United Purple NPCs</a></li>
+      </ul>
+    </div>
+    <div class="top-bar-right">
+      <ul class="menu">
+        <li><form action="/" method="POST"><input class="small button" type="submit" value="Back to Site"></form></li>
+        <li><form action="/signup" method="POST"><input class="small button" type="submit" value="Sign Up"></form></li>
+      </ul>
+    </div>
+  </div><br>
+
+  <div class="callout large secondary">
+    <div class="row">
+      <div class="large-4 columns">
+        <form action="/login_user" class="log-in" method="POST">
+          <h4 class="text-center"><b>LOGIN</b><br>Enter your username and password below to proceed!</h4>
+          <h4> {{error}} </h4>
+          <label>Username
+            <input type="text" name="username" placeholder="somebody">
+          </label>
+          <label>Password
+            <input type="password" name="password" placeholder="Password">
+          </label>
+          <input id="show-password" type="checkbox"><label for="show-password">Show password</label>
+          <p><input type="submit" class="button expanded" value="Log in"></input></p>
+        </form>
+      </div>
+    </div>
   </div>
+
+
+
 </body>
 
 </html>

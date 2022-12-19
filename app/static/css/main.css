@@ -9,3 +9,11 @@ html, body{
     height: 100vh;
     padding:0;
 }
+
+.log-in {
+    border: 1px solid #cacaca;
+    padding: 1rem;
+    border-radius: 0;
+  }
+  
+  
