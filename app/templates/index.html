@@ -22,63 +22,64 @@
   <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.5/dist/js/foundation.min.js" crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body style="background-image: url('https://i.pinimg.com/originals/1e/a2/aa/1ea2aa42b47846ef8240017413e63c65.jpg'); background-size:cover; background-repeat:no-repeat; background-attachment:fixed; background-position:center">
   <div class="top-bar">
     <div class="top-bar-left">
       <ul class="menu">
-        <li class="menu-text">UnitedPurpleNPCs</li>
-        <li>
-          <form action="/logout" method="POST">
-            <input class="small button" type="submit" value="Logout">
-          </form>
-        </li>
+        <li class="menu-text">Stalker™</li>
+        <li style="color: purple;"><a style="color: purple" href="about.html">United Purple NPCs</a></li>
       </ul>
     </div>
-  </div>
-  <br>
-  <div class="grid-x grid-padding-x">
-    <div class="large-12 cell">
-      <div>
-        <form action="/profile" method="POST">
-          <a class="small button" name="{{username}}" href="/view">
-              <div>View Profile</div>
-          </a>
-        </form>
-      </div>
+    <div class="top-bar-right">
+      <ul class="menu">
+        <li><form action="/logout" method="POST"><input class="small button" type="submit" value="Log Out"></form></li>
+        <li><form action="/view" method="POST"><input class="small button" type="submit" value="View Profile"></form></li>
+      </ul>
+    </div>
+  </div><br>
 
-      <div class="body-container">
-        <div class="landing">
-          <h1>
-            Welcome, {{username}}, to our home page!
-          </h1>
-          Before we proceed and show our calcuations about you, we will need to get some more information about you. We will obtain this information by any means possible :)
-          <!-- Test stuff: -->
-          <br> {{date}}
-          <br> {{weekday}}
-          <br> {{time}}
-          <br> {{weather}}
-          <br> Your IP address is {{ip}}
-          <!-- End of test stuff -->
-          <br> Please click our calculations button. <br>
-          <br> Our sources indicate that you've already had your calculations done. If you want to do them again, please click the button again! (alternative message if user already did it)
-          <form action="/calculate" method="POST">
-            <input class="small button" type="submit" value="CALCULATE YOUR CHANCES">
+  <div class="callout large secondary">
+    <div class="row">
+      <div class="large-4 columns">
+        <div class="body-container">
+          <div class="landing">
+            <h1>
+              Welcome, {{username}}, to our home page!
+            </h1>
+            Before we proceed and show our calcuations about you, we will need to get some more information about you. We will obtain this information by any means possible :)
+            <!-- Test stuff: -->
+            <br> {{date}}
+            <br> {{weekday}}
+            <br> {{time}}
+            <br> {{weather}}
+            <br> Your IP address is {{ip}}
+            <!-- End of test stuff -->
+            <br> Please click our calculations button. <br>
+            <br> Our sources indicate that you've already had your calculations done. If you want to do them again, please click the button again! (alternative message if user already did it)
+            <form action="/calculate" method="POST">
+              <input class="small button" type="submit" value="CALCULATE YOUR CHANCES">
+            </form>
+            <br>
+          </div>
+
+          <h2>Discover</h2>
+          <form action="/results" method="POST">
+            <input class="small button" type="submit" value="SEE YOUR RESULTS">
           </form>
+          <form action="/similar" method="POST">
+            <input class="small button" type="submit" value="SEE SIMILARITIES">
+          </form>
+          [random stuff we could implement later lol]
+
           <br>
         </div>
-
-        <h2>Discover</h2>
-        <form action="/results" method="POST">
-          <input class="small button" type="submit" value="SEE YOUR RESULTS">
-        </form>
-        <form action="/similar" method="POST">
-          <input class="small button" type="submit" value="SEE SIMILARITIES">
-        </form>
-        [random stuff we could implement later lol]
-
-        <br>
+      </div>
+    </div>
       </div>
     </div>
   </div>
+
+
+
 </body>
 </html>
