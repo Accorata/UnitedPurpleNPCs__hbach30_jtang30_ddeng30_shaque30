@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 </head>
 
-  <body>
+  <body style="background-image: url('https://i.pinimg.com/originals/74/3f/c7/743fc7768fd9d749300f0c6f85ed54e3.jpg'); background-size:cover; background-repeat:no-repeat; background-attachment:fixed; background-position:center">
     <div class="top-bar">
       <div class="top-bar-left">
         <ul class="menu">
@@ -28,26 +28,27 @@
       </div>
     </div><br>
 
-    <div class="grid-x grid-padding-x">
-      <div class="large-12 cell"><br>
-    <h1> SIGNUP </h1>
-    <h3> Create a username and password below to be able to log in! </h3>
-    <h4> {{error}} </h4>
-    <form action="/new_account", method="POST">
-      Username: <input type="text" name="username"> </br>
-      Password: <input type="text" name="password"> </br>
-      Repeat Password: <input type="text" name="password1"> </br>
-      <input class="small button" type="submit" name="sub1">
-    </form>
-    <br>
-    <form action="/login", method="POST">
-      <a class="small button" href="/login">Login</a>
-    </form>
-    <form action="/", method="POST">
-        <a class="small button" href="/">Back to site</a>
-      </form>
-      <div>
+    <div class="callout large secondary">
+      <div class="row">
+        <div class="large-4 columns">
+        <form action="/new_account" class="log-in" method="POST">
+          <h4 class="text-center"><b>SIGNUP</b><br>Create a username and password below to be able to log in!</h4>
+          <h4> {{error}} </h4>
+          <label>Username
+            <input type="text" name="username" placeholder="somebody">
+          </label>
+          <label>Password
+            <input type="password" name="password" placeholder="Password">
+          </label>
+          <label>Retype Password
+            <input type="password" name="password1" placeholder="Password">
+          </label>
+          <input id="show-password" type="checkbox"><label for="show-password">Show password</label>
+          <p><input type="submit" class="button expanded" value="Sign Up"></input></p>
+        </form>
+        </div>
       </div>
+    </div>
   </body>
 
 </html>
