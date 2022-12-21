@@ -141,3 +141,8 @@ created check_user_exists
 created change_pw
 fix errorss with database usage
 ==============================================================
+
+DavidD -- 2022-12-20 22:31
+--------------------------------------------------------------
+implemented some js fxns for main page animations
+==============================================================
