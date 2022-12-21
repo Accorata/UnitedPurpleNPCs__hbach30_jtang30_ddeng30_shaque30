@@ -18,7 +18,7 @@ import os
 app = Flask(__name__)
 app.secret_key = os.urandom(32)
 
-db_name = "app/p1_info.db"
+db_name = "p1_info.db"
 
 @app.route('/', methods = ['GET', 'POST']) # Landing Page
 def show_index():
@@ -29,7 +29,7 @@ def show_index():
     stored_data = (username, city, weather, 5, time)
     db = sqlite3.connect(db_name)
     c = db.cursor()
-    c.execute("delete from info where username = ?;", (username,))
+    delete_user(username)
     c.execute("insert into info values (?,?,?,?,?);", stored_data)
     db.commit()
     db.close()
@@ -49,7 +49,7 @@ def create_user():
     if flask_request.method == 'POST':
         db = sqlite3.connect(db_name)
         c = db.cursor()
-        user_list = c.execute("SELECT username from users;").fetchall()
+        user_list = get_users()
         #print(user_list)
         username = flask_request.form['username']
         if (username,) in user_list:
@@ -61,8 +61,6 @@ def create_user():
             
         new_account = [username, flask_request.form['password']]
         c.execute("INSERT INTO users VALUES (?, ?)", new_account)
-        db.commit()
-        db.close()
         session['username'] = username
         return redirect(url_for('show_index'))
     return "Error- not post"
@@ -73,8 +71,8 @@ def login():
     if flask_request.method == 'POST':
         db = sqlite3.connect(db_name)
         c = db.cursor()
-        user_list = c.execute("SELECT username from users;").fetchall()
-        pw_list = c.execute("SELECT username, password from users;").fetchall()
+        user_list = get_users()
+        pw_list = get_combo()
         username = flask_request.form['username']
         pw = flask_request.form['password']
         if (username,) not in user_list:
@@ -91,62 +89,6 @@ def login():
 def logout():
     session.pop('username')
     return redirect(url_for('show_index'))
-
-def get_user_info():
-    url = f"https://api.ipify.org" # ***** We need to make an kb for this
-    data = request.urlopen(url).read()
-    ip = str(data)[2:-1]
-
-    ipstack_key = open("app/keys/ipstack_key.txt", "r").read()
-
-    url = f"http://api.ipstack.com/"+ip+"?access_key="+ipstack_key
-    print(url)
-
-    data = request.urlopen(url).read()
-    location_results = json.loads(data)
-
-    latitude = location_results['latitude']
-    longitude = location_results['longitude']
-
-    weatherbit_key = open("app/keys/weatherbit_key.txt", "r").read()
-
-    url = f"https://api.weatherbit.io/v2.0/current?lat="+str(latitude)+"&lon="+str(longitude)+"&key="+weatherbit_key
-
-    data = request.urlopen(url).read()
-    weather_results = json.loads(data)['data'][0]
-    #return weather_results;
-    weather_description = weather_results['weather']['description']
-    location = weather_results['timezone']
-    divider_index = location.index('/')
-    city = location[divider_index+1:]
-    #return weather_results
-
-    url = f'https://worldtimeapi.org/api/timezone/'+location+'.json'
-    data = request.urlopen(url).read()
-    time_results = json.loads(data)
-    time_data = time_results['datetime']
-
-    days_of_week = ('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday')
-    week_day = days_of_week[int(time_results['day_of_week'])]
-
-    months = ('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December')
-    month = months[int(time_data[5:7])-1]
-
-    day = time_data[8:10]
-    year = time_data[0:4]
-    time = time_data[11:16]
-    return (ip, month+" "+day+", "+year, time, week_day, weather_description, city)
-
-def get_ip():
-    return flask_request.environ.get('HTTP_X_REAL_IP', flask_request.remote_addr)
-
-def find_similar_results(username):
-    db = sqlite3.connect(db_name)
-    c = db.cursor()
-    user_data = c.execute("select * from info where username = ?;", (username,)).fetchone()
-    (username, city, weather, temp, number) = user_data
-    user_list = c.execute("select * from info where city = ? or weather = ? or temperature = ? or time = ?;", (city, weather, temp, number)).fetchall()
-    return user_list
 
 if __name__ == "__main__":
     app.debug = True

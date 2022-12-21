@@ -132,3 +132,9 @@ Warning- ipstack_key has exhausted its uses, and it's aware
 of when I try to use a different email on the same computer-
 so someone has to provision a new key.
 ==============================================================
+
+JefferyT -- 2022-12-20 21:00
+--------------------------------------------------------------
+created db functions
+moved fuctions to appropriate .py files
+==============================================================
