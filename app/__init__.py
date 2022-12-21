@@ -50,7 +50,7 @@ def create_user():
         user_list = get_users()
         #print(user_list)
         username = flask_request.form['username']
-        if (username,) in user_list:
+        if check_user_exist(username):
             return render_template('signup.html', error = "Username already exists.")
         if flask_request.form['password'] != flask_request.form['password1']:
             return render_template('signup.html', error = "Passwords do not match.")
@@ -73,7 +73,7 @@ def login():
         pw_list = get_combo()
         username = flask_request.form['username']
         pw = flask_request.form['password']
-        if (username,) not in user_list:
+        if check_user_exist(username) == False:
             return render_template('login.html', error = "Username not found. Please create an account or try again.")
         if (username, pw) not in pw_list:
             return render_template('login.html', error = "Incorrect password for this username. Please try again.")

@@ -137,4 +137,6 @@ JefferyT -- 2022-12-20 21:00
 --------------------------------------------------------------
 created db functions
 moved fuctions to appropriate .py files
+created check_user_exists
+created change_pw
 ==============================================================

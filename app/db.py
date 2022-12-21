@@ -6,7 +6,13 @@ P1 -- LoveCalc But Creepy
 time spent: 1 hrs
 '''
 
+from flask import Flask, session, render_template, redirect, url_for, request as flask_request
+from db import *
+from urllib import *
+import urllib.request
 import sqlite3
+import json
+import os
 
 DB_FILE = "p1_info.db"
 db = sqlite3.connect(DB_FILE, check_same_thread = False)
@@ -17,19 +23,59 @@ c.execute("""CREATE TABLE IF NOT EXISTS info(username TEXT, city TEXT, weather T
  time TEXT)""")
 
 def delete_user(username):
-    return c.execute("delete from info where username = ?;", (username,))
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()   
+    c.execute("delete from info where username = ?;", (username,))
+    db.commit()
+    db.close()
 
 def store_data(stored_data):
-    return c.execute("insert into info values (?,?,?,?,?);", stored_data)
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()   
+    c.execute("insert into info values (?,?,?,?,?);", stored_data)
+    db.commit()
+    db.close()
 
 def get_users():
-    return c.execute("SELECT username from users;").fetchall()
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()  
+    userlist = c.execute("SELECT username from users;").fetchall()
+    db.commit()
+    db.close()
+    return userlist
 
 def get_combo():
-    return c.execute("SELECT username, password from users;").fetchall()
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()  
+    combolist = c.execute("SELECT username, password from users;").fetchall()
+    db.commit()
+    db.close()
+    return combolist
 
 def new_user(new_account):
-    return c.execute("INSERT INTO users VALUES (?, ?)", new_account)
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()  
+    c.execute("INSERT INTO users VALUES (?, ?)", new_account)
+    db.commit()
+    db.close()
+
+def check_user_exist(username):
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()  
+    c.execute("SELECT username FROM users WHERE username=?", (username,))
+
+    user = c.fetchone()
+    db.close()
+
+    return user!= None
+
+def change_pw(username, new_pw):
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()  
+    c.execute("UPDATE users SET password = ? WHERE username=?", (new_pw, username))
+
+    db.commit()
+    db.close()
 
 def get_user_info():
     url = f"https://api.ipify.org"
