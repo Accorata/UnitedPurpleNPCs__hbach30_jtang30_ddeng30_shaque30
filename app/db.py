@@ -126,7 +126,7 @@ def get_ip():
     return flask_request.environ.get('HTTP_X_REAL_IP', flask_request.remote_addr)
 
 def find_similar_results(username):
-    db = sqlite3.connect(db_name)
+    db = sqlite3.connect(DB_FILE)
     c = db.cursor()
     user_data = c.execute("select * from info where username = ?;", (username,)).fetchone()
     (username, city, weather, temp, number) = user_data

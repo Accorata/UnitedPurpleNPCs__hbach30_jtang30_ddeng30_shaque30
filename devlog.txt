@@ -135,8 +135,9 @@ so someone has to provision a new key.
 
 JefferyT -- 2022-12-20 21:00
 --------------------------------------------------------------
-created db functions
+created database functions for ease of use in __init__.py
 moved fuctions to appropriate .py files
 created check_user_exists
 created change_pw
+fix errorss with database usage
 ==============================================================
