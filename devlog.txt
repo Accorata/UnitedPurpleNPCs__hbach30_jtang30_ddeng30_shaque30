@@ -146,3 +146,15 @@ DavidD -- 2022-12-20 22:31
 --------------------------------------------------------------
 implemented some js fxns for main page animations
 ==============================================================
+
+HenryB -- 2022-12-20 23:04
+--------------------------------------------------------------
+Added a try/except to check if APIs are functioning (in both
+__init__.py and /templates/index.html)
+Urgent to do list: (Please read this!!!)
+- Make password show when "Show password" is clicked (it doesn't)
+- Create a nice UI for displaying user results (card?)
+- Create a nice UI for displaying similar user results (cards on carosel?)
+- LoveCalc calculations stuff
+- Discord API (looks unlikely)
+==============================================================

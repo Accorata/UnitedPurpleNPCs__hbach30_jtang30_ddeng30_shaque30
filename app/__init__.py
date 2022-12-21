@@ -24,7 +24,10 @@ def show_index():
     if 'username' not in session :
         return render_template('main.html')
     username = session['username']
-    (ip, date, time, week_day, weather, city) = get_user_info()
+    try :
+        (ip, date, time, week_day, weather, city) = get_user_info()
+    except :
+        return render_template('index.html', username=username, error="Unfortunately, one of the APIs this site relies on is currently down. We apologize for the error. Please try again later.")
     stored_data = (username, city, weather, 5, time)
     db = sqlite3.connect(db_name)
     c = db.cursor()
@@ -55,7 +58,7 @@ def create_user():
             return render_template('signup.html', error = "Passwords do not match.")
         if len(flask_request.form['password']) == 0:
             return render_template('signup.html', error = "Please enter a password.")
-            
+
         new_account = [username, flask_request.form['password']]
         new_user(new_account)
         session['username'] = username
