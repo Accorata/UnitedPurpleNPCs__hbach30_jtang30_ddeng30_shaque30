@@ -30,9 +30,7 @@ def show_index():
     db = sqlite3.connect(db_name)
     c = db.cursor()
     delete_user(username)
-    c.execute("insert into info values (?,?,?,?,?);", stored_data)
-    db.commit()
-    db.close()
+    store_data(stored_data)
     others = find_similar_results(session['username'])
     return render_template('index.html', username=username, ip=others, date=date, time=time, weekday=week_day, weather=weather)#, month=month)
 
@@ -60,7 +58,7 @@ def create_user():
             return render_template('signup.html', error = "Please enter a password.")
             
         new_account = [username, flask_request.form['password']]
-        c.execute("INSERT INTO users VALUES (?, ?)", new_account)
+        new_user(new_account)
         session['username'] = username
         return redirect(url_for('show_index'))
     return "Error- not post"

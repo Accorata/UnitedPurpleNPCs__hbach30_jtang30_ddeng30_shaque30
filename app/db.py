@@ -28,6 +28,9 @@ def get_users():
 def get_combo():
     return c.execute("SELECT username, password from users;").fetchall()
 
+def new_user(new_account):
+    return c.execute("INSERT INTO users VALUES (?, ?)", new_account)
+
 def get_user_info():
     url = f"https://api.ipify.org"
     data = request.urlopen(url).read()
