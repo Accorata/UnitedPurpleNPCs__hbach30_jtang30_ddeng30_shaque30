@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <script src="../static/js/visibility.js"></script>
 </head>
 
 <body style="background-image: url('https://i.pinimg.com/originals/74/3f/c7/743fc7768fd9d749300f0c6f85ed54e3.jpg'); background-size:cover; background-repeat:no-repeat; background-attachment:fixed; background-position:center">
@@ -39,9 +40,9 @@
             <input type="text" name="username" placeholder="somebody">
           </label>
           <label>Password
-            <input type="password" name="password" placeholder="Password">
+            <input type="password" name="password" placeholder="Password" id="pw">
           </label>
-          <input id="show-password" type="checkbox"><label for="show-password">Show password</label>
+          <input onclick="showpw()" type="checkbox"><label for="show-password">Show password</label>
           <p><input type="submit" class="button expanded" value="Log in"></input></p>
         </form>
       </div>

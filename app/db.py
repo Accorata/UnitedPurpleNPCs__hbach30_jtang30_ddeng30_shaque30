@@ -9,6 +9,7 @@ time spent: 1 hrs
 from flask import Flask, session, render_template, redirect, url_for, request as flask_request
 from db import *
 from urllib import *
+import http.client
 import urllib.request
 import sqlite3
 import json
@@ -24,21 +25,21 @@ c.execute("""CREATE TABLE IF NOT EXISTS info(username TEXT, city TEXT, weather T
 
 def delete_user(username):
     db = sqlite3.connect(DB_FILE)
-    c = db.cursor()   
+    c = db.cursor()
     c.execute("delete from info where username = ?;", (username,))
     db.commit()
     db.close()
 
 def store_data(stored_data):
     db = sqlite3.connect(DB_FILE)
-    c = db.cursor()   
+    c = db.cursor()
     c.execute("insert into info values (?,?,?,?,?);", stored_data)
     db.commit()
     db.close()
 
 def get_users():
     db = sqlite3.connect(DB_FILE)
-    c = db.cursor()  
+    c = db.cursor()
     userlist = c.execute("SELECT username from users;").fetchall()
     db.commit()
     db.close()
@@ -46,7 +47,7 @@ def get_users():
 
 def get_combo():
     db = sqlite3.connect(DB_FILE)
-    c = db.cursor()  
+    c = db.cursor()
     combolist = c.execute("SELECT username, password from users;").fetchall()
     db.commit()
     db.close()
@@ -54,14 +55,14 @@ def get_combo():
 
 def new_user(new_account):
     db = sqlite3.connect(DB_FILE)
-    c = db.cursor()  
+    c = db.cursor()
     c.execute("INSERT INTO users VALUES (?, ?)", new_account)
     db.commit()
     db.close()
 
 def check_user_exist(username):
     db = sqlite3.connect(DB_FILE)
-    c = db.cursor()  
+    c = db.cursor()
     c.execute("SELECT username FROM users WHERE username=?", (username,))
 
     user = c.fetchone()
@@ -71,7 +72,7 @@ def check_user_exist(username):
 
 def change_pw(username, new_pw):
     db = sqlite3.connect(DB_FILE)
-    c = db.cursor()  
+    c = db.cursor()
     c.execute("UPDATE users SET password = ? WHERE username=?", (new_pw, username))
 
     db.commit()
@@ -132,6 +133,17 @@ def find_similar_results(username):
     (username, city, weather, temp, number) = user_data
     user_list = c.execute("select * from info where city = ? or weather = ? or temperature = ? or time = ?;", (city, weather, temp, number)).fetchall()
     return user_list
+
+def lovecalc(name1, name2):
+    conn = http.client.HTTPSConnection("love-calculator.p.rapidapi.com")
+    headers = {
+    'X-RapidAPI-Key': "c323d31791msh2d75f0f06146040p12028ajsn5bc1193dd201",
+    'X-RapidAPI-Host': "love-calculator.p.rapidapi.com"
+    }
+    conn.request("GET", "/getPercentage?sname=" + name1 + "&fname=" + name2, headers=headers)
+    res = conn.getresponse()
+    data = res.read()
+    return data.decode("utf-8")
 
 db.commit()
 db.close()
