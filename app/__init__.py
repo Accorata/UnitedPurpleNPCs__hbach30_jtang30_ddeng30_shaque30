@@ -25,14 +25,11 @@ def show_index():
         return render_template('main.html')
     username = session['username']
     try :
-        (ip, date, time, week_day, weather, city) = get_user_info()
+        (ip, date, time, week_day, weather, city, town, continent, country, abbr) = get_user_info()
     except :
         return render_template('index.html', username=username, error="Unfortunately, one of the APIs this site relies on is currently down. We apologize for the error. Please try again later.")
-    stored_data = (username, city, weather, 5, time)
-    db = sqlite3.connect(db_name)
-    c = db.cursor()
-    delete_user(username)
-    store_data(stored_data)
+    stored_data = (username, city, week_day, weather, 5, town, continent, country, abbr, time)
+    replace(stored_data, username)
     others = find_similar_results(session['username'])
     return render_template('index.html', username=username, ip=ip, date=date, time=time, weekday=week_day, weather=weather, similar=others)#, month=month)
 
@@ -40,6 +37,9 @@ def show_index():
 def show_results():
     if 'username' not in session :
         redirect('/')
+    username = session['username']
+    bruh = get_user_data(username)
+    print(bruh)
     return render_template('results.html')
 
 @app.route('/signup', methods = ["GET", "POST"]) # Sign up page
@@ -71,7 +71,6 @@ def create_user():
         return redirect(url_for('show_index'))
     return "Error- not post"
 
-
 @app.route('/login_user', methods = ["POST"]) # Redirection to home page upon successful login
 def login():
     if flask_request.method == 'POST':
@@ -90,11 +89,14 @@ def login():
         return redirect(url_for('show_index'))
     return "Error- not post"
 
-
 @app.route('/logout', methods = ["POST"])
 def logout():
     session.pop('username')
     return redirect(url_for('show_index'))
+
+
+######################
+
 
 def get_user_info():
     url = "https://api.ipify.org"
@@ -102,57 +104,55 @@ def get_user_info():
     ip = str(data)[2:-1]
 
     ipstack_key = open("app/keys/ipstack_key.txt", "r").read()
-
     url = f"http://api.ipstack.com/"+ip+"?access_key="+ipstack_key
-    print(url)
 
     data = request.urlopen(url).read()
     location_results = json.loads(data)
+    continent = location_results['continent_name']
+    country = location_results['country_name']
+    town = location_results['city']
 
     latitude = location_results['latitude']
     longitude = location_results['longitude']
 
+
     weatherbit_key = open("app/keys/weatherbit_key.txt", "r").read()
-
     url = "https://api.weatherbit.io/v2.0/current?lat="+str(latitude)+"&lon="+str(longitude)+"&key="+weatherbit_key
-
     data = request.urlopen(url).read()
+
     weather_results = json.loads(data)['data'][0]
-    #return weather_results;
     weather_description = weather_results['weather']['description']
     location = weather_results['timezone']
     divider_index = location.index('/')
     city = location[divider_index+1:]
-    #return weather_results
 
     url = f'https://worldtimeapi.org/api/timezone/'+location+'.json'
     data = request.urlopen(url).read()
     time_results = json.loads(data)
     time_data = time_results['datetime']
+    abbr = time_results['abbreviation']
 
     days_of_week = ('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday')
     week_day = days_of_week[int(time_results['day_of_week'])]
 
     months = ('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December')
     month = months[int(time_data[5:7])-1]
-
     day = time_data[8:10]
     year = time_data[0:4]
     time = time_data[11:16]
-    return (ip, month+" "+day+", "+year, time, week_day, weather_description, city)
+    print (ip, month+" "+day+", "+year, time, week_day, weather_description, city, town, continent, country, abbr)
+    return (ip, month+" "+day+", "+year, time, week_day, weather_description, city, town, continent, country, abbr)
 
-def find_similar_results(username):
-    db = sqlite3.connect(db_name)
-    c = db.cursor()
-    user_data = get_user_data(username)
-    (username, city, weather, temp, number) = user_data
-    user_list = c.execute("select * from info where city = ? or weather = ? or temperature = ? or time = ?;", (city, weather, temp, number)).fetchall()
-    return user_list
-
-def get_user_data(username):
-    db = sqlite3.connect(db_name)
-    c = db.cursor()
-    return c.execute("select * from info where username = ?;", (username,)).fetchone()
+def lovecalc(name1, name2):
+    conn = http.client.HTTPSConnection("love-calculator.p.rapidapi.com")
+    headers = {
+    'X-RapidAPI-Key': "c323d31791msh2d75f0f06146040p12028ajsn5bc1193dd201",
+    'X-RapidAPI-Host': "love-calculator.p.rapidapi.com"
+    }
+    conn.request("GET", "/getPercentage?sname=" + name1 + "&fname=" + name2, headers=headers)
+    res = conn.getresponse()
+    data = res.read()
+    return data.decode("utf-8")
 
 if __name__ == "__main__":
     app.debug = True
