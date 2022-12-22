@@ -134,10 +134,7 @@ def get_user_info():
     year = time_data[0:4]
     time = time_data[11:16]
     return (ip, month+" "+day+", "+year, time, week_day, weather_description, city)
-
-def get_ip():
-    return flask_request.environ.get('HTTP_X_REAL_IP', flask_request.remote_addr)
-
+    
 def find_similar_results(username):
     db = sqlite3.connect(db_name)
     c = db.cursor()

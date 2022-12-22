@@ -44,14 +44,33 @@
               <!-- End of test stuff -->
               <br>
 
-              <!-- Other similar users:
-              {% for user in similar %}
-                {{user}}
-              {% endfor %} -->
             {% endif %}
           </div>
 
           <h2>Discover</h2>
+          Other similar users:
+          <!-- <ul class="test-carosel" data-orbit>
+            <li class="active">
+              <img></img>
+              <div class="orbit-caption">
+                Caption One.
+              </div>
+            </li>
+            <li>
+              <img></img>
+              <div class="orbit-caption">
+                Caption Two.
+              </div>
+            </li>
+          {% for user in similar %}
+            <li>
+              <div>
+                Username: {{user[0]}}
+                {{user}}
+              </div>
+            </li>
+          {% endfor %}
+          </ul> -->
           <form action="/results" method="POST">
             <input class="small button" type="submit" value="SEE YOUR RESULTS">
           </form>
