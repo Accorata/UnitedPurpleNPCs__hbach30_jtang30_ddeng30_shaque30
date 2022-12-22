@@ -36,6 +36,12 @@ def show_index():
     others = find_similar_results(session['username'])
     return render_template('index.html', username=username, ip=ip, date=date, time=time, weekday=week_day, weather=weather, similar=others)#, month=month)
 
+@app.route('/results', methods = ["GET", "POST"])
+def show_results():
+    if 'username' not in session :
+        redirect('/')
+    return render_template('results.html')
+
 @app.route('/signup', methods = ["GET", "POST"]) # Sign up page
 def show_signup():
     return render_template('signup.html')
@@ -134,7 +140,7 @@ def get_user_info():
     year = time_data[0:4]
     time = time_data[11:16]
     return (ip, month+" "+day+", "+year, time, week_day, weather_description, city)
-    
+
 def find_similar_results(username):
     db = sqlite3.connect(db_name)
     c = db.cursor()
