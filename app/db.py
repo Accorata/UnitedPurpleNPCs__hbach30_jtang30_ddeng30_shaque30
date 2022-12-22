@@ -23,8 +23,16 @@ c = db.cursor()
 c.execute("""CREATE TABLE IF NOT EXISTS users(username TEXT UNIQUE, password TEXT)""")
 c.execute("""CREATE TABLE IF NOT EXISTS info(username TEXT, city TEXT, weekday TEXT, weather TEXT, temperature INTEGER,
  town TEXT, cont TEXT, country TEXT, abbr TEXT, time TEXT)""")
+c.execute("""CREATE TABLE IF NOT EXISTS love(username TEXT, m1 INTEGER, m2 INTEGER, m3 INTEGER, m4 INTEGER, m5 INTEGER, m6 INTEGER)""")
 
 def delete_user(username):
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    c.execute("delete from info where username = ?;", (username,))
+    db.commit()
+    db.close()
+
+def delete_user_love(username):
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
     c.execute("delete from info where username = ?;", (username,))
@@ -35,6 +43,13 @@ def store_data(stored_data):
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
     c.execute("insert into info values (?,?,?,?,?,?,?,?,?,?);", stored_data)
+    db.commit()
+    db.close()
+
+def store_love_data(stored_data):
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    c.execute("insert into love values (?,?,?,?,?,?,?);", stored_data)
     db.commit()
     db.close()
 
@@ -67,6 +82,14 @@ def replace(stored_data, user):
     c = db.cursor()
     delete_user(user)
     store_data(stored_data)
+    db.commit()
+    db.close()
+
+def replace_love(stored_data, user):
+    db = sqlite3.connect(db_name)
+    c = db.cursor()
+    delete_user_love(user)
+    store_love_data(stored_data)
     db.commit()
     db.close()
 
@@ -110,5 +133,12 @@ def get_user_data(username):
     db = sqlite3.connect(db_name)
     c = db.cursor()
     return c.execute("select * from info where username = ?;", (username,)).fetchone()
+    db.commit()
+    db.close()
+
+def get_love_user_data(username):
+    db = sqlite3.connect(db_name)
+    c = db.cursor()
+    return c.execute("select * from love where username = ?;", (username,)).fetchone()
     db.commit()
     db.close()

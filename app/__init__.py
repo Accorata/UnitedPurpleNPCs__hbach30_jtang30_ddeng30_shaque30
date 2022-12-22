@@ -36,11 +36,13 @@ def show_index():
 @app.route('/results', methods = ["GET", "POST"])
 def show_results():
     if 'username' not in session :
-        redirect('/')
+        redirect(url_for('show_index'))
     username = session['username']
     bruh = get_user_data(username)
-    print(bruh)
-    return render_template('results.html')
+    stored_data = match(bruh)
+    (user, x1, x2, x3, x4, x5, x6) = stored_data
+    replace_love(stored_data, username)
+    return render_template('results.html', username=username, x1=x1, x2=x2, x3=x3, x4=x4, x5=x5, x6=x6)
 
 @app.route('/signup', methods = ["GET", "POST"]) # Sign up page
 def show_signup():
@@ -125,6 +127,7 @@ def get_user_info():
     location = weather_results['timezone']
     divider_index = location.index('/')
     city = location[divider_index+1:]
+    city = city.replace("_", " ")
 
     url = f'https://worldtimeapi.org/api/timezone/'+location+'.json'
     data = request.urlopen(url).read()
@@ -144,6 +147,8 @@ def get_user_info():
     return (ip, month+" "+day+", "+year, time, week_day, weather_description, city, town, continent, country, abbr)
 
 def lovecalc(name1, name2):
+    name1 = name1.replace(' ', "%20")
+    name2 = name2.replace(' ', "%20")
     conn = http.client.HTTPSConnection("love-calculator.p.rapidapi.com")
     headers = {
     'X-RapidAPI-Key': "c323d31791msh2d75f0f06146040p12028ajsn5bc1193dd201",
@@ -152,7 +157,18 @@ def lovecalc(name1, name2):
     conn.request("GET", "/getPercentage?sname=" + name1 + "&fname=" + name2, headers=headers)
     res = conn.getresponse()
     data = res.read()
-    return data.decode("utf-8")
+    da = json.loads(data)
+    return da
+
+def match(bruh):
+    x1 = (lovecalc(bruh[0], bruh[1]))['percentage']
+    x2 = (lovecalc(bruh[2], bruh[3]))['percentage']
+    x3 = (lovecalc(bruh[1], bruh[3]))['percentage']
+    x4 = (lovecalc(bruh[1], bruh[5]))['percentage']
+    x5 = (lovecalc(bruh[1], bruh[6]))['percentage']
+    x6 = (lovecalc(bruh[1], bruh[7]))['percentage']
+    stored_data = (bruh[0], x1, x2, x3, x4, x5, x6)
+    return stored_data
 
 if __name__ == "__main__":
     app.debug = True
