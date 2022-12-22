@@ -158,3 +158,8 @@ Urgent to do list: (Please read this!!!)
 - LoveCalc calculations stuff
 - Discord API (looks unlikely)
 ==============================================================
+
+HenryB -- 2022-12-21 21:58
+--------------------------------------------------------------
+Created/started some functions for displaying similar info
+==============================================================

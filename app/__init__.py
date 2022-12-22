@@ -34,7 +34,7 @@ def show_index():
     delete_user(username)
     store_data(stored_data)
     others = find_similar_results(session['username'])
-    return render_template('index.html', username=username, ip=ip, date=date, time=time, weekday=week_day, weather=weather)#, month=month)
+    return render_template('index.html', username=username, ip=ip, date=date, time=time, weekday=week_day, weather=weather, similar=others)#, month=month)
 
 @app.route('/signup', methods = ["GET", "POST"]) # Sign up page
 def show_signup():
@@ -141,10 +141,15 @@ def get_ip():
 def find_similar_results(username):
     db = sqlite3.connect(db_name)
     c = db.cursor()
-    user_data = c.execute("select * from info where username = ?;", (username,)).fetchone()
+    user_data = get_user_data(username)
     (username, city, weather, temp, number) = user_data
     user_list = c.execute("select * from info where city = ? or weather = ? or temperature = ? or time = ?;", (city, weather, temp, number)).fetchall()
     return user_list
+
+def get_user_data(username):
+    db = sqlite3.connect(db_name)
+    c = db.cursor()
+    return c.execute("select * from info where username = ?;", (username,)).fetchone()
 
 if __name__ == "__main__":
     app.debug = True
