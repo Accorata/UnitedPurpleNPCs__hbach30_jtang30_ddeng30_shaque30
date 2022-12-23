@@ -14,15 +14,15 @@
   <div class="top-bar">
     <div class="top-bar-left">
       <ul class="menu">
-        <li class="menu-text">Stalker™</li>
-        <li style="color: purple;"><a style="color: purple" href="about.html">United Purple NPCs</a></li>
+        <li class="menu-text"><form method="POST" action="{{url_for('show_index')}}"><button style="cursor: pointer;">Stalker™</button></form></li>
+        <li><a style="color: purple; font-style: normal!important; pointer-events: none;">United Purple NPCs</a></li>
       </ul>
     </div>
 
     <div class="top-bar-right">
       <ul class="menu">
         <li><form action="/login" method="POST"><input class="small button" type="submit" value="Login"></form></li>
-        <li><form action="/signup" method="POST"><input class="small button" type="submit" value="Sign Up"></form></li>
+        <li><form action="/signup" method="POST"><input class="small button" type="submit" value="Sign Up" ></form></li>
       </ul>
     </div>
   </div>

@@ -33,7 +33,7 @@ def show_index():
     others = find_similar_results(session['username'])
     return render_template('index.html', username=username, ip=ip, date=date, time=time, weekday=week_day, weather=weather, similar=others, city=city, country=country, continent=continent)#, month=month)
 
-@app.route('/results', methods = ["GET", "POST"])
+@app.route('/results', methods = ['POST'])
 def show_results():
     if 'username' not in session :
         redirect(url_for('show_index'))

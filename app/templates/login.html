@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../static/css/main.css">
   <script src="../static/js/visibility.js"></script>
 </head>
 
@@ -18,13 +19,11 @@
   <div class="top-bar">
     <div class="top-bar-left">
       <ul class="menu">
-        <li class="menu-text">Stalker™</li>
-        <li style="color: purple;"><a style="color: purple" href="about.html">United Purple NPCs</a></li>
+        <li class="menu-text"><form method="POST" action="{{url_for('show_index')}}"><button style="cursor: pointer;">Stalker™</button></form></li>
       </ul>
     </div>
     <div class="top-bar-right">
       <ul class="menu">
-        <li><form action="/" method="POST"><input class="small button" type="submit" value="Back to Site"></form></li>
         <li><form action="/signup" method="POST"><input class="small button" type="submit" value="Sign Up"></form></li>
       </ul>
     </div>

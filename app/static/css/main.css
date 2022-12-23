@@ -60,3 +60,7 @@
 
 .title-container .line1 {top: 0;}
 .title-container .line2 {bottom: 0;}
+
+.menu .button {
+    background-color: black;
+}
