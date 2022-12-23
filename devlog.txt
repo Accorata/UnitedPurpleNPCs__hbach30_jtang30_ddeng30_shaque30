@@ -212,4 +212,6 @@ Key testing + gitignore
 DavidD -- 2022-12-22 23:40
 --------------------------------------------------------------
 Changes to CSS of root
+Reformat error messages when creating and logging into accounts
+Animate pages
 ==============================================================

@@ -27,14 +27,15 @@
         <li><form action="/signup" method="POST"><input class="small button" type="submit" value="Sign Up"></form></li>
       </ul>
     </div>
-  </div><br>
+  </div>
 
-  <div class="callout large secondary">
+  <div class="callout large" style="width: 60%; margin: auto; background-color: lightblue; padding: 0; margin-top: 5%; animation: fadeIn 3s;">
     <div class="row">
       <div class="large-4 columns">
         <form action="/login_user" class="log-in" method="POST">
-          <h4 class="text-center"><b>LOGIN</b><br>Enter your username and password below to proceed!</h4>
-          <h4> {{error}} </h4>
+          <h4 class="text-center"><b>LOGIN</b></h4>
+          <h5 class="text-center">Enter your username and password below to proceed!</h5>
+          <h4 class="text-center" style="color: red; font-size: 14px;"> {{error}} </h4>
           <label>Username
             <input type="text" name="username" placeholder="somebody">
           </label>

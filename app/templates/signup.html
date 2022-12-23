@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <script src="../static/js/visibility.js"></script>
+    <link rel="stylesheet" href="../static/css/main.css">
 </head>
 
   <body style="background-image: url('https://i.pinimg.com/originals/74/3f/c7/743fc7768fd9d749300f0c6f85ed54e3.jpg'); background-size:cover; background-repeat:no-repeat; background-attachment:fixed; background-position:center">
@@ -18,30 +19,29 @@
       <div class="top-bar-left">
         <ul class="menu">
           <li class="menu-text">Stalker™</li>
-          <li style="color: purple;"><a style="color: purple" href="about.html">United Purple NPCs</a></li>
         </ul>
       </div>
       <div class="top-bar-right">
         <ul class="menu">
-          <li><form action="/" method="POST"><input class="small button" type="submit" value="Back to Site"></form></li>
           <li><form action="/login" method="POST"><input class="small button" type="submit" value="Login"></form></li>
         </ul>
       </div>
-    </div><br>
+    </div>
 
-    <div class="callout large secondary">
+    <div class="callout large" style="width: 60%; margin: auto; background-color: lightblue; padding: 0; margin-top: 5%; animation: fadeIn 3s;">
       <div class="row">
         <div class="large-4 columns">
         <form action="/new_account" class="log-in" method="POST">
-          <h4 class="text-center"><b>SIGNUP</b><br>Create a username and password below to be able to log in!</h4>
-          <h4> {{error}} </h4>
+          <h4 class="text-center"><b>SIGNUP</b>
+          <h5 class="text-center">Create a username and password below to be able to log in!</h5>
+          <h4 class="text-center" style="color: red; font-size: 14px;"> {{error}} </h4>
           <label>Username
             <input type="text" name="username" placeholder="somebody">
           </label>
           <label>Password
             <input type="password" name="password" placeholder="Password" id="pw">
           </label>
-          <label>Retype Password
+          <label>Confirm Password
             <input type="password" name="password1" placeholder="Password" id="pw2">
           </label>
           <input onclick="showpw2(), showpw()" type="checkbox"><label for="show-password">Show password</label>
