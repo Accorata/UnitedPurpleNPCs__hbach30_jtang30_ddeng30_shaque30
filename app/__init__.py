@@ -28,7 +28,7 @@ def show_index():
         (ip, date, time, week_day, weather, city, town, continent, country, abbr) = get_user_info()
     except :
         return render_template('index.html', username=username, error="Unfortunately, one of the APIs this site relies on is currently down. We apologize for the error. Please try again later.")
-    stored_data = (username, city, week_day, weather, 5, town, continent, country, abbr, time)
+    stored_data = (username, city, week_day, weather, date, town, continent, country, abbr, time)
     replace(stored_data, username)
     others = find_similar_results(session['username'])
     return render_template('index.html', username=username, ip=ip, date=date, time=time, weekday=week_day, weather=weather, similar=others, city=city, country=country, continent=continent)#, month=month)

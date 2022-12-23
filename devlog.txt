@@ -203,7 +203,8 @@ created readme in keys folder
 adjusted names of keys to align with project requirements
 ==============================================================
 
-HenryB -- 2022-12-22 21:28
+HenryB -- 2022-12-22 21:38
 --------------------------------------------------------------
-Get similar results function and key testing + gitignore
+Get similar results function complete
+Key testing + gitignore
 ==============================================================

@@ -21,7 +21,7 @@ db = sqlite3.connect(DB_FILE, check_same_thread = False)
 c = db.cursor()
 
 c.execute("""CREATE TABLE IF NOT EXISTS users(username TEXT UNIQUE, password TEXT)""")
-c.execute("""CREATE TABLE IF NOT EXISTS info(username TEXT, city TEXT, weekday TEXT, weather TEXT, temperature INTEGER,
+c.execute("""CREATE TABLE IF NOT EXISTS info(username TEXT, city TEXT, weekday TEXT, weather TEXT, date TEXT,
  town TEXT, cont TEXT, country TEXT, abbr TEXT, time TEXT)""")
 c.execute("""CREATE TABLE IF NOT EXISTS love(username TEXT, m1 INTEGER, m2 INTEGER, m3 INTEGER, m4 INTEGER, m5 INTEGER, m6 INTEGER)""")
 
@@ -125,12 +125,12 @@ def find_similar_results(username):
     db = sqlite3.connect(db_name)
     c = db.cursor()
     user_data = get_user_data(username)
-    (username, city, weekday, weather, temp, town, cont, country, abbr, time) = user_data
-    user_list = c.execute("select * from info where city = ? or weekday = ? or weather = ? or cont = ? or country = ? or abbr = ? or time = ?;", (city, weekday, weather, cont, country, abbr, time)).fetchall()
+    (username, city, weekday, weather, date, town, cont, country, abbr, time) = user_data
+    user_list = c.execute("select * from info where city = ? or weekday = ? or weather = ? or date = ? or cont = ? or country = ? or abbr = ? or time = ?;", (city, weekday, weather, date, cont, country, abbr, time)).fetchall()
     user_list_without = []
     for user in user_list :
         if user[0] != username :
-            user_list_without += user
+            user_list_without += (user,)
     return user_list_without
 
 def get_user_data(username):

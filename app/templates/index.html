@@ -66,18 +66,20 @@
             </li>
 
           </ul> -->
+          <!-- {{similar}} -->
           {% for user in similar %}
               <div>
                 Username: {{user[0]}}
                 {{user}}
               </div>
           {% endfor %}
+          <br>
           <form action="/results" method="POST">
             <input class="small button" type="submit" value="SEE YOUR RESULTS">
           </form>
-          <form action="/similar" method="POST">
+          <!-- <form action="/similar" method="POST">
             <input class="small button" type="submit" value="SEE SIMILARITIES">
-          </form>
+          </form> -->
 
           <br>
         </div>
