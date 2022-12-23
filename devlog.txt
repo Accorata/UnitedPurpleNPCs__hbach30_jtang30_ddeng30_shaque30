@@ -79,7 +79,7 @@ HenryB -- 2022-12-09 15:34
 WorldTimeAPI calls functioning and data processed into nicer forms
 Started testing other APIs
 
-Shafiul -- 2022-12-10 10:09
+ShafiulH -- 2022-12-10 10:09
 --------------------------------------------------------------
 Created buttons linking webpages to other webpages
 Created basic html templates for all the pages
@@ -102,6 +102,12 @@ HenryB -- 2022-12-12 16:02
 Added session log in/log out username stuff
 Fixed bug where 'request' came from two modules by replacing
 one with 'form_request' (we'll use this for HTML/POST forms)
+==============================================================
+
+ShafiulH -- 2022-12-13 14:10
+--------------------------------------------------------------
+Created template slider (which still needs some work)
+Created navigation bars for html
 ==============================================================
 
 UnitedPurpleNPCs -- 2022-12-14 EOC
@@ -133,6 +139,11 @@ of when I try to use a different email on the same computer-
 so someone has to provision a new key.
 ==============================================================
 
+ShafiulH -- 2022-12-20 14:09
+--------------------------------------------------------------
+Displaying some nice backgrounds for html
+==============================================================
+
 JefferyT -- 2022-12-20 21:00
 --------------------------------------------------------------
 created database functions for ease of use in __init__.py
@@ -159,7 +170,22 @@ Urgent to do list: (Please read this!!!)
 - Discord API (looks unlikely)
 ==============================================================
 
+ShafiulH -- 2022-12-21 18:17
+--------------------------------------------------------------
+Created new keys to use for the API
+Toggled the password when logsin/signup
+==============================================================
+
 HenryB -- 2022-12-21 21:58
 --------------------------------------------------------------
 Created/started some functions for displaying similar info
+==============================================================
+
+ShafiulH -- 2022-12-21 19:23
+--------------------------------------------------------------
+Finished creating a results page
+Imported the loveapi calculator
+Created database for loveapi information
+Created methods for the database
+Displaying more information on the html
 ==============================================================
