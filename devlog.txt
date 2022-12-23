@@ -195,3 +195,15 @@ JefferyT -- 2022-12-22 20:00
 Corrected paths and title in readme's launch codes
 Updated design doc to align with current state and specified information
 ==============================================================
+
+JefferyT -- 2022-12-22 21:00
+--------------------------------------------------------------
+Added IPify and its knowledge base link to API section of readme
+created readme in keys folder
+adjusted names of keys to align with project requirements
+==============================================================
+
+HenryB -- 2022-12-22 21:28
+--------------------------------------------------------------
+Get similar results function and key testing + gitignore
+==============================================================

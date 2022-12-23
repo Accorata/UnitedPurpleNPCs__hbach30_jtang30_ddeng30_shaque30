@@ -11,6 +11,7 @@ Our plan is to create a website that demonstrates the information we can retriev
 In addition, the website will store all this information in a database. This way, when the current user wishes, the website will display similar results from previous users. 
 
 ## APIs
+- IPify API: https://github.com/stuy-softdev/notes-and-code/blob/main/api_kb/411_on_ipify.md 
 - Love Calculator API: https://github.com/stuy-softdev/notes-and-code/blob/main/api_kb/411_on_LoveCalculator.md
 - ipstack API: https://github.com/stuy-softdev/notes-and-code/blob/main/api_kb/411_on_ipstack.md
 - WorldTimeAPI: https://github.com/stuy-softdev/notes-and-code/blob/main/api_kb/411_on_WorldTimeAPI.md
