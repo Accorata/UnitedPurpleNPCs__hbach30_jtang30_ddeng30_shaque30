@@ -32,7 +32,7 @@ git clone git@github.com:Accorata/UnitedPurpleNPCs__hbach30_jtang30_ddeng30_shaq
 `2) Navigate to root directory`
 
 ``` 
-cd UnitedPurpleNPCs__hbach30_jtang30_ddeng30_shaque30/app
+cd UnitedPurpleNPCs__hbach30_jtang30_ddeng30_shaque30/
 ```
 `3) install requirements`
 ```
@@ -41,7 +41,7 @@ pip install -r requirements.txt
 `4) Run the program`
 
 ``` 
-python3 __init__.py
+python3 app/__init__.py
 ```
 
 `5) Open the following link in any web browser`
