@@ -44,6 +44,12 @@ def show_results():
     replace_love(stored_data, username)
     return render_template('results.html', username=username, x1=x1, x2=x2, x3=x3, x4=x4, x5=x5, x6=x6)
 
+@app.route('/similar', methods = ["GET", "POST"])
+def show_similar():
+    if 'username' not in session :
+        redirect(url_for('show_index'))
+    return render_template('similar.html')
+
 @app.route('/signup', methods = ["GET", "POST"]) # Sign up page
 def show_signup():
     return render_template('signup.html')

@@ -9,29 +9,35 @@
             crossorigin="anonymous"></script>
   </head>
 
-  <body>
-    <div class="grid-x grid-padding-x">
-      <div class="large-12 cell">
-        <br>
-        <form action="/logout" method="POST">
-          <input class="small button" type="submit" name="sub2" value="Logout">
-        </form>
-        <form action="/profile" method="POST">
-          <a class="small button" name="{{username}}" href="/view">
-              <div>View Profile</div>
-          </a>
-        </form>
-        <form action="/" method="POST">
-          <input class="small button" type="submit" name="sub2" value="Go back home">
-        </form>
-
-        <br><h1>
-          Here are some similarities we found with other people:
-        </h1>
-        [result here]
-        <br><br>
-        <form action="/results" method="POST">
-          <input class="small button" type="submit" value="SEE RESULTS">
-        </form>
+  <body style="background-image: url('https://i.pinimg.com/originals/1e/a2/aa/1ea2aa42b47846ef8240017413e63c65.jpg'); background-size:cover; background-repeat:no-repeat; background-attachment:fixed; background-position:center">
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <ul class="menu">
+          <li class="menu-text">Stalker™</li>
+          <li style="color: purple;"><a style="color: purple" href="about.html">United Purple NPCs</a></li>
+        </ul>
       </div>
-    </div>
+      <div class="top-bar-right">
+        <ul class="menu">
+          <li><form action="/logout" method="POST"><input class="small button" type="submit" value="Log Out"></form></li>
+          <li><form action="/" method="POST"><input class="small button" type="submit" value="Back Home"></form></li>
+        </ul>
+      </div>
+    </div><br>
+
+    <div class="callout large secondary">
+      <div class="row">
+        <div class="large-4 columns">
+          <div class="body-container">
+            <div class="landing">
+              <h1>Here are some similarities we found with other users, {{username}}:</h1>
+              [similarities]
+              <form action="/results" method="POST">
+                <input class="small button" type="submit" value="BACK TO RESULTS">
+              </form>
+            <br>
+          </div>
+        </div>
+      </div>
+        </div>
+      </div>
