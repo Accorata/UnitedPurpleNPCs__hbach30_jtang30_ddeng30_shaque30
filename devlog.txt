@@ -192,6 +192,6 @@ Displaying more information on the html
 
 JefferyT -- 2022-12-22 20:00
 --------------------------------------------------------------
-Corrected paths in readme's launch codes
+Corrected paths and title in readme's launch codes
 Updated design doc to align with current state and specified information
 ==============================================================

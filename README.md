@@ -1,4 +1,4 @@
-# LoveCalc But Creepy by UnitedPurpleNPCs
+# Stalker by UnitedPurpleNPCs
 ## PM: Henry Bach (API/Flask)
 ## Devo: Jeffery Tang (SQLite)
 ## Devo: David Deng (API/Flask)
