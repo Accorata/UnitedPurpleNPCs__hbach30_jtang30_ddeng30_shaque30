@@ -127,7 +127,11 @@ def find_similar_results(username):
     user_data = get_user_data(username)
     (username, city, weekday, weather, temp, town, cont, country, abbr, time) = user_data
     user_list = c.execute("select * from info where city = ? or weekday = ? or weather = ? or cont = ? or country = ? or abbr = ? or time = ?;", (city, weekday, weather, cont, country, abbr, time)).fetchall()
-    return user_list
+    user_list_without = []
+    for user in user_list :
+        if user[0] != username :
+            user_list_without += user
+    return user_list_without
 
 def get_user_data(username):
     db = sqlite3.connect(db_name)

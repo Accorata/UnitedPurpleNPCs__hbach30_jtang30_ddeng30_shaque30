@@ -123,7 +123,6 @@ def get_user_info():
     latitude = location_results['latitude']
     longitude = location_results['longitude']
 
-
     weatherbit_key = open("app/keys/weatherbit_key.txt", "r").read()
     url = "https://api.weatherbit.io/v2.0/current?lat="+str(latitude)+"&lon="+str(longitude)+"&key="+weatherbit_key
     data = request.urlopen(url).read()
@@ -157,8 +156,8 @@ def lovecalc(name1, name2):
     name2 = name2.replace(' ', "%20")
     conn = http.client.HTTPSConnection("love-calculator.p.rapidapi.com")
     headers = {
-    'X-RapidAPI-Key': "c323d31791msh2d75f0f06146040p12028ajsn5bc1193dd201",
-    'X-RapidAPI-Host': "love-calculator.p.rapidapi.com"
+        'X-RapidAPI-Key': "c323d31791msh2d75f0f06146040p12028ajsn5bc1193dd201",
+        'X-RapidAPI-Host': "love-calculator.p.rapidapi.com"
     }
     conn.request("GET", "/getPercentage?sname=" + name1 + "&fname=" + name2, headers=headers)
     res = conn.getresponse()
