@@ -7,18 +7,20 @@
   <title>Document</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.5/dist/css/foundation.min.css" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.5/dist/js/foundation.min.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="../static/css/main.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
 <body style="background-image: url('https://i.pinimg.com/originals/1e/a2/aa/1ea2aa42b47846ef8240017413e63c65.jpg'); background-size:cover; background-repeat:no-repeat; background-attachment:fixed; background-position:center">
   <div class="top-bar">
     <div class="top-bar-left">
       <ul class="menu">
-        <li class="menu-text">Stalker™</li>
-        <li><a style="color: purple">United Purple NPCs</a></li>
+        <li class="menu-text"><form method="POST" action="{{url_for('show_index')}}"><button class="logo" style="cursor: pointer;">Stalker™</button></form></li>
       </ul>
     </div>
     <div class="top-bar-right">
       <ul class="menu">
+        <li><a href="">{{username}}</a></li>
         <li><form action="/logout" method="POST"><input class="small button" type="submit" value="Log Out"></form></li>
       </ul>
     </div>
@@ -28,29 +30,56 @@
     <div class="row">
       <div class="large-4 columns">
         <div class="body-container">
-          <div class="landing">
-            <h1>
-              Welcome, {{username}}, to our home page!
-            </h1>
-            {{error}}
+          <div class="landing" style="padding-bottom: 2%;">
+            <center style="color: red;">{{error}}</center>
             {% if error == null %}
-              <!-- Test stuff: -->
-              <br> Last Accessed: {{date}}
-              <br> Weekday: {{weekday}}
-              <br> Time: {{time}}
-              <br> Weather: {{weather}}
-              <br> Current City: {{city}}
-              <br> Country: {{country}}
-              <br> Continent: {{continent}}
-              <br> Your IP address is: {{ip}}
-              <!-- End of test stuff -->
-              <br>
+            <button id="reveal" style="cursor: pointer;" onclick="$('.expandable').toggleClass('not_expanded');"><b>LOOK AT ALL THE INFO WE GOT ON YOU!</b></button>
 
+              <!-- Test stuff: -->
+              <table style="width: 60%; margin: auto;">
+                <thead>
+                  <tr>
+                    <th style="text-align: center;">Field</th>
+                    <th style="text-align: center;">Result</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>LAST ACCESSED</td>
+                    <td>{{date}}</td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">TIME & WEATHER</td>
+                  </tr>
+                  <tr class="expandable not_expanded">
+                    <td>WEEKDAY</td>
+                    <td>{{weekday}}</td>
+                  </tr>
+                  <tr class="expandable not_expanded">
+                    <td>TIME</td>
+                    <td>{{time}}</td>
+                  </tr>
+                  <tr class="expandable not_expanded">
+                    <td>WEATHER</td>
+                    <td>{{weather}}</td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">LOCATION</td>
+                  </tr>
+                  <tr class="expandable not_expanded">
+                    <td colspan="2">{{city}}, {{country}} in {{continent}}</td>
+                  </tr>
+                  <tr class="expandable not_expanded">
+                    <td colspan="2">{{ip}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- End of test stuff -->
             {% endif %}
           </div>
 
-          <h2>Discover</h2>
-          Other similar users:
+          
+          <center style="padding-bottom: 2%; font-size: 24px;"><b><u>Users with Similar Results</u></b></center>
           <!-- <ul class="test-carosel" data-orbit>
             <li class="active">
               <img></img>
@@ -68,20 +97,19 @@
           </ul> -->
           <!-- {{similar}} -->
           {% for user in similar %}
-              <div>
-                Username: {{user[0]}}
-                {{user}}
-              </div>
+          <center><button class="button" data-open="exampleModal1">{{user[0]}}</button></center>
+          <div class="reveal" id="exampleModal1" data-reveal>
+            <button class="close-button" data-close aria-label="Close modal" type="button">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
           {% endfor %}
-          <br>
-          <form action="/results" method="POST">
-            <input class="small button" type="submit" value="SEE YOUR RESULTS">
+          <form style="text-align: center;" action="/results" method="POST">
+            <input style="background-color: aqua; color: black; font-size: 20px;" class="small button" type="submit" value="SEE YOUR RESULTS">
           </form>
           <!-- <form action="/similar" method="POST">
             <input class="small button" type="submit" value="SEE SIMILARITIES">
           </form> -->
-
-          <br>
         </div>
       </div>
     </div>

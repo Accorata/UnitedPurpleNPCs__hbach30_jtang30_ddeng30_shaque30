@@ -78,3 +78,57 @@
     0% {opacity: 0;}
     100% {opacity: 1;}
 }
+
+table {
+    border-collapse: collapse;
+}
+
+td, th {
+    border: 2px solid teal;
+    width: 10rem;
+    padding: 0.5rem;
+    margin: 1rem;
+}
+
+td {
+    text-align: center;
+}
+
+tr.expandable.not_expanded {      /* hide row reminder on end of transition */
+    transition-delay: 2020ms;     
+    visibility: collapse;
+}
+
+tr.expandable td {
+    transition: all 2000ms linear;
+    line-height: 140%;            /* % or UoM required for good transition */
+}
+
+tr.expandable.not_expanded td {
+    line-height: 0%;     
+    padding-top: 0;
+    padding-bottom: 0;
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);    
+    opacity: 0;
+}
+
+tr.expandable.not_expanded td > div {
+    transition: max-height 2000ms ease-in;
+    max-height: 10rem;
+    overflow: hidden;
+    max-height: 0rem;
+    transition-timing-function: cubic-bezier(0, 0.8, 0, 0.8);
+}
+
+#reveal {
+    border-radius: 25px;
+    margin: auto;
+    width: 100%;
+    color: red;
+    padding-bottom: 2%;
+}
+
+#reveal:hover {
+    color: green;
+}
