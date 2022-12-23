@@ -1,3 +1,3 @@
-rm app/p1_info.db
+rm p1_info.db
 
-python3 db.py
+python3 app/db.py

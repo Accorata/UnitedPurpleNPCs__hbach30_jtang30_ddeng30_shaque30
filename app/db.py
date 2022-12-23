@@ -126,7 +126,7 @@ def find_similar_results(username):
     c = db.cursor()
     user_data = get_user_data(username)
     (username, city, weekday, weather, temp, town, cont, country, abbr, time) = user_data
-    user_list = c.execute("select * from info where city = ? or weather = ? or temperature = ? or time = ?;", (city, weather, temp, time)).fetchall()
+    user_list = c.execute("select * from info where city = ? or weekday = ? or weather = ? or cont = ? or country = ? or abbr = ? or time = ?;", (city, weekday, weather, cont, country, abbr, time)).fetchall()
     return user_list
 
 def get_user_data(username):

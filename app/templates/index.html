@@ -35,12 +35,11 @@
             {{error}}
             {% if error == null %}
               <!-- Test stuff: -->
-              <br> Today's date: {{date}}
+              <br> Last Accessed: {{date}}
               <br> Weekday: {{weekday}}
               <br> Time: {{time}}
               <br> Weather: {{weather}}
               <br> Current City: {{city}}
-              <br> Current Town: {{town}}
               <br> Country: {{country}}
               <br> Continent: {{continent}}
               <br> Your IP address is: {{ip}}
@@ -65,15 +64,14 @@
                 Caption Two.
               </div>
             </li>
+
+          </ul> -->
           {% for user in similar %}
-            <li>
               <div>
                 Username: {{user[0]}}
                 {{user}}
               </div>
-            </li>
           {% endfor %}
-          </ul> -->
           <form action="/results" method="POST">
             <input class="small button" type="submit" value="SEE YOUR RESULTS">
           </form>

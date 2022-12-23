@@ -31,15 +31,15 @@ def show_index():
     stored_data = (username, city, week_day, weather, 5, town, continent, country, abbr, time)
     replace(stored_data, username)
     others = find_similar_results(session['username'])
-    return render_template('index.html', username=username, ip=ip, date=date, time=time, weekday=week_day, weather=weather, similar=others, city=city, town=town, country=country, continent=continent)#, month=month)
+    return render_template('index.html', username=username, ip=ip, date=date, time=time, weekday=week_day, weather=weather, similar=others, city=city, country=country, continent=continent)#, month=month)
 
 @app.route('/results', methods = ["GET", "POST"])
 def show_results():
     if 'username' not in session :
         redirect(url_for('show_index'))
     username = session['username']
-    bruh = get_user_data(username)
-    stored_data = match(bruh)
+    user_data = get_user_data(username)
+    stored_data = match(user_data)
     (user, x1, x2, x3, x4, x5, x6) = stored_data
     replace_love(stored_data, username)
     return render_template('results.html', username=username, x1=x1, x2=x2, x3=x3, x4=x4, x5=x5, x6=x6)
@@ -178,4 +178,4 @@ def match(bruh):
 
 if __name__ == "__main__":
     app.debug = True
-    app.run()
+    app.run(port=2000)
