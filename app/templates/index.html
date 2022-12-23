@@ -97,11 +97,9 @@
           </ul> -->
           <!-- {{similar}} -->
           {% for user in similar %}
-          <center><button class="button" data-open="exampleModal1">{{user[0]}}</button></center>
-          <div class="reveal" id="exampleModal1" data-reveal>
-            <button class="close-button" data-close aria-label="Close modal" type="button">
-              <span aria-hidden="true">&times;</span>
-            </button>
+          <div>
+            Username: {{user[0]}}
+            {{user}}
           </div>
           {% endfor %}
           <form style="text-align: center;" action="/results" method="POST">
