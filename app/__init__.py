@@ -31,7 +31,7 @@ def show_index():
     stored_data = (username, city, week_day, weather, 5, town, continent, country, abbr, time)
     replace(stored_data, username)
     others = find_similar_results(session['username'])
-    return render_template('index.html', username=username, ip=ip, date=date, time=time, weekday=week_day, weather=weather, similar=others)#, month=month)
+    return render_template('index.html', username=username, ip=ip, date=date, time=time, weekday=week_day, weather=weather, similar=others, city=city, town=town, country=country, continent=continent)#, month=month)
 
 @app.route('/results', methods = ["GET", "POST"])
 def show_results():
@@ -169,10 +169,10 @@ def lovecalc(name1, name2):
 def match(bruh):
     x1 = (lovecalc(bruh[0], bruh[1]))['percentage']
     x2 = (lovecalc(bruh[2], bruh[3]))['percentage']
-    x3 = (lovecalc(bruh[1], bruh[3]))['percentage']
-    x4 = (lovecalc(bruh[1], bruh[5]))['percentage']
-    x5 = (lovecalc(bruh[1], bruh[6]))['percentage']
-    x6 = (lovecalc(bruh[1], bruh[7]))['percentage']
+    x3 = (lovecalc(bruh[0], bruh[3]))['percentage']
+    x4 = (lovecalc(bruh[0], bruh[5]))['percentage']
+    x5 = (lovecalc(bruh[0], bruh[6]))['percentage']
+    x6 = (lovecalc(bruh[0], bruh[7]))['percentage']
     stored_data = (bruh[0], x1, x2, x3, x4, x5, x6)
     return stored_data
 
