@@ -111,7 +111,7 @@ def get_user_info():
     data = request.urlopen(url).read()
     ip = str(data)[2:-1]
 
-    ipstack_key = open("app/keys/ipstack_key.txt", "r").read()
+    ipstack_key = open("app/keys/key_ipstack.txt", "r").read()
     url = f"http://api.ipstack.com/"+ip+"?access_key="+ipstack_key
 
     data = request.urlopen(url).read()
@@ -123,7 +123,7 @@ def get_user_info():
     latitude = location_results['latitude']
     longitude = location_results['longitude']
 
-    weatherbit_key = open("app/keys/weatherbit_key.txt", "r").read()
+    weatherbit_key = open("app/keys/key_weatherbit.txt", "r").read()
     url = "https://api.weatherbit.io/v2.0/current?lat="+str(latitude)+"&lon="+str(longitude)+"&key="+weatherbit_key
     data = request.urlopen(url).read()
 
